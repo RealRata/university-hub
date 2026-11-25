@@ -29,6 +29,36 @@ const careerCatalog = [
   { group: "Ingeniería y tecnología", name: "Telecomunicaciones", short: "Transmisión de información y diseño de redes de comunicación.", areas: ["Redes", "Señales", "Comunicaciones inalámbricas", "Fibra óptica"], subjects: ["Señales", "Electromagnetismo", "Redes", "Probabilidad"], skills: ["Diseñar enlaces", "Analizar redes"], tools: ["Python", "MATLAB", "Wireshark"] }
 ];
 
+
+];
+
+const unamPlans = {
+  "Actuaría": {official:"Actuaría",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/actuaria-fciencias-planestudios17.pdf",status:"official"},
+  "Matemáticas": {official:"Matemáticas",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/matematicasplanestudiosfacciencias13.pdf",status:"official"},
+  "Matemáticas Aplicadas": {official:"Matemáticas Aplicadas",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/matematicasaplicadasplanestudiosfciencias.pdf",status:"official"},
+  "Ciencia de Datos": {official:"Ciencia de Datos",entity:"IIMAS y entidades académicas de carrera de origen",url:"https://www.oferta.unam.mx/planestudios/Ciencia-de-Datos-IIMAS_Plan%20de%20estudios19.pdf",status:"official"},
+  "Ciencias de la Computación": {official:"Ciencias de la Computación",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/cienciascomputacion-fciencias-planestudios17.pdf",status:"official"},
+  "Ingeniería en Computación": {official:"Ingeniería en Computación",entity:"Facultad de Ingeniería",url:"https://www.oferta.unam.mx/planestudios/ingcomputacionplanestudiosfacing13.pdf",status:"official"},
+  "Telecomunicaciones": {official:"Ingeniería en Telecomunicaciones / Ingeniería en Telecomunicaciones, Sistemas y Electrónica",entity:"UNAM · confirmar plantel y denominación",url:"https://oferta.unam.mx/carreras.php",status:"related"},
+  "Ingeniería Electrónica": {official:"Ingeniería Eléctrica Electrónica",entity:"UNAM · confirmar plantel",url:"https://oferta.unam.mx/carreras.php",status:"related"},
+  "Economía": {official:"Economía",entity:"Facultad de Economía",url:"https://oferta.unam.mx/carreras.php",status:"related"},
+  "Informática": {official:"Informática",entity:"UNAM · confirmar modalidad y plantel",url:"https://oferta.unam.mx/carreras.php",status:"related"},
+  "Ingeniería Mecatrónica": {official:"Ingeniería Mecatrónica",entity:"UNAM · confirmar plantel y plan",url:"https://oferta.unam.mx/carreras.php",status:"related"}
+};
+function renderUnamPlan() {
+  const career = data.profile.career;
+  const plan = unamPlans[career];
+  const box = $("#unam-plan-info");
+  if (!box) return;
+  if (!career) { box.innerHTML = "<p>Selecciona una carrera para consultar su correspondencia con la oferta académica y los planes oficiales de la UNAM.</p>"; return; }
+  if (!plan) {
+    box.innerHTML = '<strong>Sin correspondencia oficial confirmada</strong><p>Esta carrera del catálogo es afín, pero no se ha identificado un plan UNAM con la misma denominación. No se cargarán materias inventadas.</p><a href="https://oferta.unam.mx/carreras.php" target="_blank" rel="noopener">Consultar carreras oficiales de la UNAM ↗</a>';
+    return;
+  }
+  const exact = plan.status === "official";
+  box.innerHTML = '<span class="plan-status ' + (exact ? "verified" : "related") + '">' + (exact ? "PLAN OFICIAL IDENTIFICADO" : "CARRERA AFÍN · VERIFICAR EQUIVALENCIA") + '</span><h3>' + escapeHTML(plan.official) + '</h3><p>' + escapeHTML(plan.entity) + '</p><a href="' + plan.url + '" target="_blank" rel="noopener">Abrir documento o ficha oficial ↗</a><p class="plan-note">Confirma plantel, modalidad y versión antes de registrar materias: la UNAM puede ofrecer planes distintos para una misma carrera.</p>';
+}
+ 
 let data;
 try { data = JSON.parse(localStorage.getItem("uh-data")); } catch (error) { data = null; }
 const demoSubjectNames = ["Cálculo", "Álgebra", "Programación", "Probabilidad"];
@@ -67,7 +97,7 @@ function renderCareers() {
   $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";\n  renderUnamPlan();
 }
 function render() {
-  const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
+  const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);\n  $("#name").value = data.profile.name || "";\n  $("#university").value = "Universidad Nacional Autónoma de México (UNAM)";\n  $("#career").value = data.profile.career || "";\n  $("#semester").value = data.profile.semester || 1;\n  $("#approved").value = data.profile.approved || 0;\n  $("#total").value = data.profile.total || 0;
   $("#s-subjects").textContent = data.subjects.length;
   $("#s-tasks").textContent = pending.length;
   $("#s-average").textContent = average;
