@@ -36,8 +36,8 @@
 
 ## Fase 4 — Catálogo académico oficial
 - [x] Perfil académico orientado a la UNAM y enlaces a documentos oficiales identificados para seis carreras.\n- [x] Diferenciar planes oficiales identificados de carreras afines sin equivalencia confirmada.\n- [ ] Catálogo completo de instituciones, campus, facultades y carreras.
-- [ ] Planes de estudio versionados con fuente, plantel, modalidad y fecha de verificación.\n- [ ] Importación de asignaturas por semestre desde los documentos oficiales, con créditos y seriación.
-- [ ] Planes específicos para Actuaría, Ciencias de la Computación e Ingeniería en Computación por institución.
+- [x] Mapas curriculares por semestre para cinco licenciaturas y una ruta de Ciencia de Datos, con enlaces oficiales y créditos disponibles.\n- [x] Seguimiento local de asignaturas acreditadas y cálculo de avance por créditos de las materias listadas.\n- [ ] Completar prerrequisitos y seriaciones materia por materia; ampliar rutas de origen de Ciencia de Datos.
+- [x] Primeros planes específicos UNAM para Actuaría, Ciencias de la Computación e Ingeniería en Computación.
 - [ ] Mapa curricular y seriación.
 - [ ] Cálculo de avance por materias y créditos.
 - [ ] Historial al cambiar de carrera o plan.
