@@ -338,6 +338,7 @@ $("#profile-form").addEventListener("submit", (event) => {
 });
 $("#profile-select").addEventListener("change", (event) => switchProfile(event.target.value));
 $("#create-profile").addEventListener("click", () => $("#profile-dialog").showModal());
+$("#create-profile-inline").addEventListener("click", () => $("#profile-dialog").showModal());
 $("#cancel-profile").addEventListener("click", () => $("#profile-dialog").close());
 $("#profile-create-form").addEventListener("submit", (event) => {
   event.preventDefault();
