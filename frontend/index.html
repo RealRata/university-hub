@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>University Hub</title>
-<link rel="stylesheet" href="styles.css?v=20261125-12">
+<link rel="stylesheet" href="styles.css?v=20261125-13">
 </head>
-<body>
+<body class="dark">
 <aside class="sidebar">
   <div class="brand"><b>U</b> university<span>hub</span></div>
   <p class="muted">TU ESPACIO ACADÉMICO</p><div class="nav-caption">TU ESPACIO</div>
@@ -71,7 +71,7 @@
 <dialog id="task-dialog"><form id="task-form"><h2>Nueva tarea</h2><label>Nombre<input id="task-title" required></label><label>Materia<input id="task-subject"></label><label>Fecha<input id="task-date" type="date" required></label><button class="primary">Guardar</button><button type="button" id="cancel-task">Cancelar</button></form></dialog>
 <dialog id="subject-dialog"><form id="subject-form"><h2>Nueva materia</h2><label>Nombre<input id="subject-name" required></label><label>Créditos<input id="subject-credits" type="number" min="1" value="8"></label><label>Calificación opcional<input id="subject-grade" type="number" min="0" max="10" step=".1"></label><button class="primary">Guardar</button><button type="button" id="cancel-subject">Cancelar</button></form></dialog>
 <dialog id="profile-dialog"><form id="profile-create-form"><h2>Crear perfil universitario</h2><label>Nombre del estudiante<input id="new-profile-name" placeholder="Ej. Alex" required></label><label>Carrera<select id="new-profile-career" required><option value="">Selecciona una carrera</option><optgroup label="Matemáticas, estadística y análisis"><option>Actuaría</option><option>Matemáticas</option><option>Matemáticas Aplicadas</option><option>Estadística</option><option>Ciencia de Datos</option><option>Economía</option><option>Finanzas</option></optgroup><optgroup label="Computación y desarrollo"><option>Ciencias de la Computación</option><option>Informática</option><option>Ingeniería de Software</option><option>Sistemas Computacionales</option><option>Inteligencia Artificial</option><option>Ciberseguridad</option><option>Tecnologías de la Información</option></optgroup><optgroup label="Ingeniería y tecnología"><option>Ingeniería en Computación</option><option>Ingeniería Electrónica</option><option>Ingeniería Eléctrica</option><option>Ingeniería Mecatrónica</option><option>Robótica</option><option>Telecomunicaciones</option></optgroup><option>Otra carrera</option></select></label><label>Semestre<input id="new-profile-semester" type="number" min="1" max="20" value="1"></label><button class="primary">Crear y abrir perfil</button><button type="button" id="cancel-profile">Cancelar</button></form></dialog>
-<script src="unam-plans.js?v=20261125-12"></script>
-<script src="app.js?v=20261125-12"></script>
+<script src="unam-plans.js?v=20261125-13"></script>
+<script src="app.js?v=20261125-13"></script>
 </body>
 </html>
