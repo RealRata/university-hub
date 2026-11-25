@@ -8,23 +8,22 @@ const iso = (d) => {
 
 let data;
 try { data = JSON.parse(localStorage.getItem("uh-data")); } catch (error) { data = null; }
+
+// Remove the original demonstration records so a new student never starts with invented progress.
+const isOldDemo = data && data.profile && data.profile.name === "Estudiante de ejemplo" &&
+  Array.isArray(data.subjects) && data.subjects.some((subject) => ["Cálculo", "Álgebra", "Programación", "Probabilidad"].includes(subject.name));
+if (isOldDemo) {
+  localStorage.removeItem("uh-data");
+  data = null;
+}
 data = data || {
-  profile: { name: "Estudiante de ejemplo", university: "Mi universidad", career: "Carrera por configurar", semester: 3, approved: 12, total: 37 },
-  subjects: [
-    { name: "Cálculo", credits: 10, grade: 9.2 },
-    { name: "Álgebra", credits: 8, grade: 8.5 },
-    { name: "Programación", credits: 8, grade: 8.8 },
-    { name: "Probabilidad", credits: 8, grade: null }
-  ],
-  tasks: [
-    { title: "Lista de ejercicios · Unidad 2", subject: "Cálculo", date: iso(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)), done: false },
-    { title: "Lectura: fundamentos", subject: "Programación", date: iso(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3)), done: false },
-    { title: "Examen parcial", subject: "Álgebra", date: iso(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6)), done: false }
-  ]
+  profile: { name: "", university: "", career: "", semester: 1, approved: 0, total: 0 },
+  subjects: [],
+  tasks: []
 };
 
 const save = () => localStorage.setItem("uh-data", JSON.stringify(data));
-const pct = () => data.profile.total > 0 ? Math.min(100, Math.round(data.profile.approved / data.profile.total * 100)) : 0;
+const pct = () => data.profile.total > 0 && data.profile.approved > 0 ? Math.min(100, Math.round(data.profile.approved / data.profile.total * 100)) : 0;
 const avg = () => {
   const grades = data.subjects.map((subject) => subject.grade).filter((grade) => grade !== null && grade !== "" && Number.isFinite(Number(grade)));
   return grades.length ? (grades.reduce((sum, grade) => sum + Number(grade), 0) / grades.length).toFixed(1) : "—";
@@ -40,11 +39,11 @@ function render() {
   $("#s-progress").textContent = progress + "%";
   $("#progress").textContent = progress + "%";
   $("#bar").style.width = progress + "%";
-  $("#credits").textContent = "Avance calculado con materias registradas";
+  $("#credits").textContent = data.profile.total > 0 ? "Avance según las materias que registraste en tu perfil." : "Configura tu plan de estudios para calcular tu avance. Por ahora es 0%.";
   $("#avg").textContent = average;
   $("#journey").textContent = progress + "%";
   $("#journey-bar").style.width = progress + "%";
-  $("#journey-detail").textContent = data.profile.approved + " materias aprobadas de " + data.profile.total + ". " + data.profile.university + " · " + data.profile.career;
+  $("#journey-detail").textContent = data.profile.total > 0 ? data.profile.approved + " materias aprobadas de " + data.profile.total + ". " + (data.profile.university || "Universidad sin configurar") + " · " + (data.profile.career || "Carrera sin configurar") : "Aún no has configurado tu plan académico. Tu progreso comenzará cuando registres tus datos reales.";
 
   $("#upcoming").innerHTML = pending.slice().sort((a, b) => a.date.localeCompare(b.date)).map((task) =>
     '<div class="row"><span>' + escapeHTML(task.title) + '<small>' + escapeHTML(task.subject || "Sin materia") + " · " + escapeHTML(task.date) + '</small></span><span>◦</span></div>'
@@ -142,8 +141,8 @@ $("#profile-form").addEventListener("submit", (event) => {
     university: $("#university").value,
     career: $("#career").value,
     semester: Number($("#semester").value),
-    approved: Number($("#approved").value),
-    total: Math.max(1, Number($("#total").value))
+    approved: Math.max(0, Number($("#approved").value) || 0),
+    total: Math.max(0, Number($("#total").value) || 0)
   };
   save(); render(); alert("Perfil guardado en este navegador");
 });
