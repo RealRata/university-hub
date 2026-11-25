@@ -112,3 +112,20 @@ dialog::backdrop{background:#10152299}
 @media(max-width:600px){.curriculum-stats{grid-template-columns:1fr 1fr}.semester-title{align-items:flex-start;gap:8px;flex-direction:column}}
 
 .curriculum-filter{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--muted);font-size:12px}.curriculum-filter select{min-width:190px}
+
+/* Multi-profile workspace */
+.header-actions{display:flex;align-items:center;gap:10px}
+.profile-picker{display:grid;gap:4px;font-size:9px;color:var(--muted);font-weight:bold;letter-spacing:.06em}
+.profile-picker select{min-width:170px;max-width:240px;padding:9px 30px 9px 10px;font-size:12px}
+.profile-management{margin-top:18px}
+.profile-choice{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.profile-choice:last-child{border:0}
+.profile-choice div{display:grid;gap:5px}
+.profile-choice small{color:var(--muted)}
+.profile-choice.selected{border-left:3px solid var(--accent);padding-left:12px}
+.profile-choice button{border:1px solid var(--line);border-radius:7px;padding:8px 11px;background:var(--soft);color:var(--text)}
+.career-focus{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:9px}
+.career-focus h3{margin:0 0 7px;font-size:15px}
+.career-focus p{color:var(--muted);font-size:12px;line-height:1.6}
+.career-focus .tag-list{margin:10px 0}
+@media(max-width:760px){header{height:auto;min-height:65px;gap:10px;flex-wrap:wrap;padding:12px 4%}.header-actions{flex-wrap:wrap}.profile-picker select{min-width:130px;max-width:170px}.header-actions #create-profile{font-size:0;padding:9px}.header-actions #create-profile:after{content:"＋ Perfil";font-size:12px}}
