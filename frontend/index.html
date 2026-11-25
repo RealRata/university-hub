@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>University Hub</title>
-<link rel="stylesheet" href="styles.css?v=20261125-9">
+<link rel="stylesheet" href="styles.css?v=20261125-10">
 </head>
 <body>
 <aside class="sidebar">
@@ -31,11 +31,12 @@
       <button class="primary" id="new-task">＋ Añadir tarea</button>
     </div>
     <section class="view active" id="dashboard">
+      <article class="panel getting-started"><div class="guide-heading"><div><small>GUÍA RÁPIDA</small><h2>Empieza por aquí</h2><p>Sigue estos pasos para dejar tu espacio listo. Puedes volver cuando quieras.</p></div><span class="guide-counter" id="guide-counter">0 de 3</span></div><div class="guide-steps" id="guide-steps"></div></article>
       <div class="stats">
-        <article><small>Materias activas</small><strong id="s-subjects">0</strong></article>
-        <article><small>Tareas pendientes</small><strong id="s-tasks">0</strong></article>
-        <article><small>Promedio actual</small><strong id="s-average">—</strong></article>
-        <article><small>Avance estimado</small><strong id="s-progress">0%</strong></article>
+        <article><small>Materias registradas</small><strong id="s-subjects">0</strong></article>
+        <article><small>Pendientes por entregar</small><strong id="s-tasks">0</strong></article>
+        <article><small>Promedio registrado</small><strong id="s-average">—</strong></article>
+        <article><small>Avance de tu carrera</small><strong id="s-progress">0%</strong></article>
       </div>
       <div class="grid">
         <article class="panel"><small>TRAYECTORIA</small><h2>Progreso de carrera</h2><strong class="big" id="progress">0%</strong><div class="bar"><i id="bar"></i></div><p id="credits">Configura tu plan de estudios para calcular tu avance.</p></article>
@@ -51,10 +52,10 @@
       <p class="notice">Las áreas y materias son una guía orientativa, no un plan oficial. Los nombres, créditos, seriaciones y requisitos cambian según la universidad y el plan de estudios.</p>
     </section>
     <section class="view" id="unam-plan"><div class="section-head"><div><h2>Plan de estudios UNAM</h2><p>Mapas curriculares oficiales por semestre. Marca las materias que ya acreditaste.</p></div></div><div id="unam-curriculum"></div></section>
-    <section class="view" id="subjects"><div class="section-head"><div><h2>Materias del semestre</h2><p>Administra tus asignaturas y créditos.</p></div><button class="primary" id="add-subject">＋ Nueva materia</button></div><div class="cards" id="subjects-list"></div></section>
-    <section class="view" id="tasks"><div class="section-head"><div><h2>Tareas y entregas</h2><p>Da seguimiento a tus próximos pendientes.</p></div><button class="primary" id="add-task-2">＋ Nueva tarea</button></div><div class="panel" id="tasks-list"></div></section>
+    <section class="view" id="subjects"><div class="section-head"><div><h2>Mis materias</h2><p>Añade las asignaturas que estás cursando y registra sus créditos y calificaciones.</p></div><button class="primary" id="add-subject">＋ Nueva materia</button></div><div class="cards" id="subjects-list"></div></section>
+    <section class="view" id="tasks"><div class="section-head"><div><h2>Tareas y entregas</h2><p>Registra qué debes entregar y marca cada tarea cuando termines.</p></div><button class="primary" id="add-task-2">＋ Nueva tarea</button></div><div class="panel" id="tasks-list"></div></section>
     <section class="view" id="calendar"><div class="section-head"><div><h2>Calendario académico</h2><p>Fechas importantes y organización semanal.</p></div></div><div class="panel"><h2 id="month">Este mes</h2><div class="calendar" id="calendar-grid"></div></div></section>
-    <section class="view" id="grades"><div class="section-head"><div><h2>Calificaciones</h2><p>Consulta tus resultados y promedio.</p></div></div><div class="panel"><h2>Promedio: <span id="avg">—</span></h2><div id="grade-list"></div></div></section>
+    <section class="view" id="grades"><div class="section-head"><div><h2>Calificaciones</h2><p>Las calificaciones que registres en tus materias aparecerán aquí.</p></div></div><div class="panel"><h2>Promedio: <span id="avg">—</span></h2><div id="grade-list"></div></div></section>
     <section class="view" id="progress-view"><div class="section-head"><div><h2>Mi trayectoria</h2><p>Tu avance universitario.</p></div></div><div class="panel"><strong class="big" id="journey">0%</strong><div class="bar"><i id="journey-bar"></i></div><p id="journey-detail"></p><p class="muted">El avance se calculará con tus datos académicos reales. Todavía no hay materias ni progreso registrados.</p></div></section>
     <section class="view" id="profile"><div class="section-head"><div><h2>Perfil académico</h2><p>Configura tu información universitaria.</p></div></div><form class="panel form" id="profile-form">
       <label>Nombre<input id="name" value="" placeholder="Tu nombre"></label>
@@ -72,7 +73,7 @@
 <dialog id="task-dialog"><form id="task-form"><h2>Nueva tarea</h2><label>Nombre<input id="task-title" required></label><label>Materia<input id="task-subject"></label><label>Fecha<input id="task-date" type="date" required></label><button class="primary">Guardar</button><button type="button" id="cancel-task">Cancelar</button></form></dialog>
 <dialog id="subject-dialog"><form id="subject-form"><h2>Nueva materia</h2><label>Nombre<input id="subject-name" required></label><label>Créditos<input id="subject-credits" type="number" min="1" value="8"></label><label>Calificación opcional<input id="subject-grade" type="number" min="0" max="10" step=".1"></label><button class="primary">Guardar</button><button type="button" id="cancel-subject">Cancelar</button></form></dialog>
 <dialog id="profile-dialog"><form id="profile-create-form"><h2>Crear perfil universitario</h2><label>Nombre del estudiante<input id="new-profile-name" placeholder="Ej. Alex" required></label><label>Carrera<select id="new-profile-career" required><option value="">Selecciona una carrera</option><optgroup label="Matemáticas, estadística y análisis"><option>Actuaría</option><option>Matemáticas</option><option>Matemáticas Aplicadas</option><option>Estadística</option><option>Ciencia de Datos</option><option>Economía</option><option>Finanzas</option></optgroup><optgroup label="Computación y desarrollo"><option>Ciencias de la Computación</option><option>Informática</option><option>Ingeniería de Software</option><option>Sistemas Computacionales</option><option>Inteligencia Artificial</option><option>Ciberseguridad</option><option>Tecnologías de la Información</option></optgroup><optgroup label="Ingeniería y tecnología"><option>Ingeniería en Computación</option><option>Ingeniería Electrónica</option><option>Ingeniería Eléctrica</option><option>Ingeniería Mecatrónica</option><option>Robótica</option><option>Telecomunicaciones</option></optgroup><option>Otra carrera</option></select></label><label>Semestre<input id="new-profile-semester" type="number" min="1" max="20" value="1"></label><button class="primary">Crear y abrir perfil</button><button type="button" id="cancel-profile">Cancelar</button></form></dialog>
-<script src="unam-plans.js?v=20261125-9"></script>
-<script src="app.js?v=20261125-9"></script>
+<script src="unam-plans.js?v=20261125-10"></script>
+<script src="app.js?v=20261125-10"></script>
 </body>
 </html>
