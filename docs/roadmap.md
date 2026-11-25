@@ -35,8 +35,8 @@
 - [ ] Exportación y eliminación de cuenta.
 
 ## Fase 4 — Catálogo académico oficial
-- [ ] Catálogo de instituciones, campus, facultades y carreras.
-- [ ] Planes de estudio versionados con fuente y fecha de verificación.
+- [x] Perfil académico orientado a la UNAM y enlaces a documentos oficiales identificados para seis carreras.\n- [x] Diferenciar planes oficiales identificados de carreras afines sin equivalencia confirmada.\n- [ ] Catálogo completo de instituciones, campus, facultades y carreras.
+- [ ] Planes de estudio versionados con fuente, plantel, modalidad y fecha de verificación.\n- [ ] Importación de asignaturas por semestre desde los documentos oficiales, con créditos y seriación.
 - [ ] Planes específicos para Actuaría, Ciencias de la Computación e Ingeniería en Computación por institución.
 - [ ] Mapa curricular y seriación.
 - [ ] Cálculo de avance por materias y créditos.
