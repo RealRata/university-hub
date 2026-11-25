@@ -30,13 +30,13 @@
     </div>
     <section class="view active" id="dashboard">
       <div class="stats">
-        <article><small>Materias activas</small><strong id="s-subjects">4</strong></article>
-        <article><small>Tareas pendientes</small><strong id="s-tasks">3</strong></article>
-        <article><small>Promedio actual</small><strong id="s-average">8.8</strong></article>
-        <article><small>Avance estimado</small><strong id="s-progress">32%</strong></article>
+        <article><small>Materias activas</small><strong id="s-subjects">0</strong></article>
+        <article><small>Tareas pendientes</small><strong id="s-tasks">0</strong></article>
+        <article><small>Promedio actual</small><strong id="s-average">—</strong></article>
+        <article><small>Avance estimado</small><strong id="s-progress">0%</strong></article>
       </div>
       <div class="grid">
-        <article class="panel"><small>TRAYECTORIA</small><h2>Progreso de carrera</h2><strong class="big" id="progress">32%</strong><div class="bar"><i id="bar"></i></div><p id="credits">Avance estimado</p></article>
+        <article class="panel"><small>TRAYECTORIA</small><h2>Progreso de carrera</h2><strong class="big" id="progress">0%</strong><div class="bar"><i id="bar"></i></div><p id="credits">Configura tu plan de estudios para calcular tu avance.</p></article>
         <article class="panel"><small>LO QUE SIGUE</small><h2>Próximas entregas</h2><div id="upcoming"></div></article>
         <article class="panel"><small>ESTE SEMESTRE</small><h2>Mis materias</h2><div id="subject-summary"></div></article>
         <article class="panel accent"><small>UN PASO A LA VEZ</small><h2>La constancia también es progreso.</h2><p>Registra tus actividades y convierte tus objetivos en acciones pequeñas y alcanzables.</p><button data-go="tasks">Organizar mi semana →</button></article>
@@ -45,15 +45,15 @@
     <section class="view" id="subjects"><div class="section-head"><div><h2>Materias del semestre</h2><p>Administra tus asignaturas y créditos.</p></div><button class="primary" id="add-subject">＋ Nueva materia</button></div><div class="cards" id="subjects-list"></div></section>
     <section class="view" id="tasks"><div class="section-head"><div><h2>Tareas y entregas</h2><p>Da seguimiento a tus próximos pendientes.</p></div><button class="primary" id="add-task-2">＋ Nueva tarea</button></div><div class="panel" id="tasks-list"></div></section>
     <section class="view" id="calendar"><div class="section-head"><div><h2>Calendario académico</h2><p>Fechas importantes y organización semanal.</p></div></div><div class="panel"><h2 id="month">Este mes</h2><div class="calendar" id="calendar-grid"></div></div></section>
-    <section class="view" id="grades"><div class="section-head"><div><h2>Calificaciones</h2><p>Consulta tus resultados y promedio.</p></div></div><div class="panel"><h2>Promedio: <span id="avg">8.8</span></h2><div id="grade-list"></div></div></section>
-    <section class="view" id="progress-view"><div class="section-head"><div><h2>Mi trayectoria</h2><p>Tu avance universitario.</p></div></div><div class="panel"><strong class="big" id="journey">32%</strong><div class="bar"><i id="journey-bar"></i></div><p id="journey-detail"></p><p class="muted">Los datos son de demostración. La versión conectada calculará el avance con el plan de estudios oficial.</p></div></section>
+    <section class="view" id="grades"><div class="section-head"><div><h2>Calificaciones</h2><p>Consulta tus resultados y promedio.</p></div></div><div class="panel"><h2>Promedio: <span id="avg">—</span></h2><div id="grade-list"></div></div></section>
+    <section class="view" id="progress-view"><div class="section-head"><div><h2>Mi trayectoria</h2><p>Tu avance universitario.</p></div></div><div class="panel"><strong class="big" id="journey">0%</strong><div class="bar"><i id="journey-bar"></i></div><p id="journey-detail"></p><p class="muted">Los datos son de demostración. La versión conectada calculará el avance con el plan de estudios oficial.</p></div></section>
     <section class="view" id="profile"><div class="section-head"><div><h2>Perfil académico</h2><p>Configura tu información universitaria.</p></div></div><form class="panel form" id="profile-form">
-      <label>Nombre<input id="name" value="Estudiante de ejemplo"></label>
-      <label>Universidad<input id="university" value="Mi universidad"></label>
-      <label>Carrera<input id="career" value="Carrera por configurar"></label>
-      <label>Semestre<input id="semester" type="number" min="1" value="3"></label>
-      <label>Materias aprobadas<input id="approved" type="number" min="0" value="12"></label>
-      <label>Total de materias<input id="total" type="number" min="1" value="37"></label>
+      <label>Nombre<input id="name" value="" placeholder="Tu nombre"></label>
+      <label>Universidad<input id="university" value="" placeholder="Tu universidad"></label>
+      <label>Carrera<input id="career" value="" placeholder="Tu carrera"></label>
+      <label>Semestre<input id="semester" type="number" min="1" value="1"></label>
+      <label>Materias aprobadas<input id="approved" type="number" min="0" value="0"></label>
+      <label>Total de materias<input id="total" type="number" min="0" value="0"></label>
       <button class="primary">Guardar perfil</button>
     </form></section>
     <footer>UNIVERSITY HUB · MVP 0.1 <span>Construido para acompañar tu trayectoria.</span></footer>
