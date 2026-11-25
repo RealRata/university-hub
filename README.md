@@ -37,7 +37,7 @@ Abre `frontend/index.html` en un navegador moderno. No requiere instalación ni 
 - [Modelo de datos](docs/data-model.md)
 - [Roadmap](docs/roadmap.md)
 
-## Estado y límites
+## Planes de estudio UNAM\n\nEl perfil académico queda orientado a la UNAM. El explorador distingue las carreras con documento oficial identificado de las carreras afines cuya equivalencia todavía debe verificarse. Se incluyen enlaces institucionales a planes de Actuaría, Matemáticas, Matemáticas Aplicadas, Ciencia de Datos, Ciencias de la Computación e Ingeniería en Computación. Los enlaces de carreras afines llevan al catálogo oficial para evitar presentar una equivalencia como si fuera un plan idéntico. La UNAM puede tener planes diferentes por facultad, plantel, modalidad y versión; confirma esos datos antes de capturar materias.\n\nFuente institucional: [Oferta Académica UNAM](https://oferta.unam.mx/carreras.php).\n\n## Estado y límites
 Esta versión es un **prototipo frontend**. Los datos personales se guardan únicamente en el navegador donde se capturan. Todavía no hay cuentas, sincronización entre dispositivos, base de datos central ni conexión con sistemas escolares. El explorador de carreras contiene orientación general para las carreras afines incluidas; sus listas de materias no son planes oficiales ni sustituyen los programas de cada universidad. El catálogo podrá ampliarse según las instituciones y los planes que se incorporen. Los planes, créditos, seriaciones y requisitos deberán verificarse con fuentes institucionales antes de presentarse como oficiales.
 
 ## Principios del producto
