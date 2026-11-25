@@ -4,39 +4,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>University Hub</title>
-<link rel="stylesheet" href="styles.css?v=20261125-10">
+<link rel="stylesheet" href="styles.css?v=20261125-11">
 </head>
 <body>
 <aside class="sidebar">
   <div class="brand"><b>U</b> university<span>hub</span></div>
-  <p class="muted">TU ESPACIO ACADÉMICO</p><div class="nav-caption">INICIO</div>
+  <p class="muted">TU ESPACIO ACADÉMICO</p><div class="nav-caption">TU ESPACIO</div>
   <nav>
-    <button class="active" data-view="dashboard">▦ Panel general</button>
-    <div class="nav-caption">PLANIFICACIÓN</div><button data-view="careers">⌘ Explorar carreras</button>
-    <button data-view="unam-plan">▤ Plan de estudios UNAM</button>
-    <button data-view="subjects">▤ Mis materias</button>
-    <button data-view="tasks">☑ Tareas y entregas</button>
-    <button data-view="calendar">▦ Calendario</button>
+    <button class="active" data-view="dashboard"><span class="nav-icon">⌂</span> Inicio</button>
+    <div class="nav-caption">ORGANIZA</div><button data-view="careers"><span class="nav-icon">⌘</span> Explorar carreras</button>
+    <button data-view="unam-plan"><span class="nav-icon">▤</span> Mi plan UNAM</button>
+    <button data-view="subjects"><span class="nav-icon">▤</span> Mis materias</button>
+    <button data-view="tasks"><span class="nav-icon">☑</span> Tareas y entregas</button>
+    <button data-view="calendar"><span class="nav-icon">▦</span> Calendario</button>
     <button data-view="grades">▥ Calificaciones</button>
     <button data-view="progress">◉ Mi trayectoria</button>
-    <div class="nav-caption">MI CUENTA</div><button data-view="profile">⚙ Perfil académico</button>
+    <div class="nav-caption">SEGUIMIENTO</div><button data-view="grades"><span class="nav-icon">▥</span> Calificaciones</button><button data-view="progress"><span class="nav-icon">◉</span> Mi progreso</button><div class="nav-caption">MI CUENTA</div><button data-view="profile"><span class="nav-icon">⚙</span> Mi perfil</button>
   </nav>
   <div class="side-bottom"><p>Tu semestre, en orden.</p><small>Un espacio para avanzar a tu ritmo.</small></div>
 </aside>
 <main>
-  <header><span>Mi espacio / <b id="crumb">Panel general</b></span><div class="header-actions"><label class="profile-picker"><small>PERFIL ACTIVO</small><select id="profile-select" aria-label="Seleccionar perfil"></select></label><button id="create-profile" class="primary">＋ Nuevo perfil</button><button id="theme">◐ Cambiar tema</button></div></header>
+  <header><span>Mi espacio / <b id="crumb">Panel general</b></span><div class="header-actions"><label class="profile-picker"><small>PERFIL ACTIVO</small><select id="profile-select" aria-label="Seleccionar perfil"></select></label><button id="create-profile" class="primary">＋ Nuevo perfil</button><button id="theme" aria-label="Cambiar entre tema claro y oscuro">◐ Tema</button></div></header>
   <div class="content">
     <div class="welcome">
       <div><small>UN ESPACIO PARA TU VIDA UNIVERSITARIA</small><h1 id="title">Tu semestre, <em>bajo control.</em></h1><p id="subtitle">Organiza tus materias, pendientes y objetivos en un solo lugar.</p></div>
       <button class="primary" id="new-task">＋ Añadir tarea</button>
     </div>
     <section class="view active" id="dashboard">
-      <article class="panel getting-started"><div class="guide-heading"><div><small>GUÍA RÁPIDA</small><h2>Empieza por aquí</h2><p>Sigue estos pasos para dejar tu espacio listo. Puedes volver cuando quieras.</p></div><span class="guide-counter" id="guide-counter">0 de 3</span></div><div class="guide-steps" id="guide-steps"></div></article>
+      <article class="panel getting-started"><div class="guide-heading"><div><small>PRIMEROS PASOS</small><h2>¿Qué hago primero?</h2><p>Completa estos pasos en orden. No necesitas configurar todo de una vez.</p></div><span class="guide-counter" id="guide-counter">0 de 3</span></div><div class="guide-steps" id="guide-steps"></div></article>
       <div class="stats">
-        <article><small>Materias registradas</small><strong id="s-subjects">0</strong></article>
-        <article><small>Pendientes por entregar</small><strong id="s-tasks">0</strong></article>
-        <article><small>Promedio registrado</small><strong id="s-average">—</strong></article>
-        <article><small>Avance de tu carrera</small><strong id="s-progress">0%</strong></article>
+        <article><small>Mis materias</small><strong id="s-subjects">0</strong></article>
+        <article><small>Tareas pendientes</small><strong id="s-tasks">0</strong></article>
+        <article><small>Mi promedio</small><strong id="s-average">—</strong></article>
+        <article><small>Avance de carrera</small><strong id="s-progress">0%</strong></article>
       </div>
       <div class="grid">
         <article class="panel"><small>TRAYECTORIA</small><h2>Progreso de carrera</h2><strong class="big" id="progress">0%</strong><div class="bar"><i id="bar"></i></div><p id="credits">Configura tu plan de estudios para calcular tu avance.</p></article>
@@ -73,7 +73,7 @@
 <dialog id="task-dialog"><form id="task-form"><h2>Nueva tarea</h2><label>Nombre<input id="task-title" required></label><label>Materia<input id="task-subject"></label><label>Fecha<input id="task-date" type="date" required></label><button class="primary">Guardar</button><button type="button" id="cancel-task">Cancelar</button></form></dialog>
 <dialog id="subject-dialog"><form id="subject-form"><h2>Nueva materia</h2><label>Nombre<input id="subject-name" required></label><label>Créditos<input id="subject-credits" type="number" min="1" value="8"></label><label>Calificación opcional<input id="subject-grade" type="number" min="0" max="10" step=".1"></label><button class="primary">Guardar</button><button type="button" id="cancel-subject">Cancelar</button></form></dialog>
 <dialog id="profile-dialog"><form id="profile-create-form"><h2>Crear perfil universitario</h2><label>Nombre del estudiante<input id="new-profile-name" placeholder="Ej. Alex" required></label><label>Carrera<select id="new-profile-career" required><option value="">Selecciona una carrera</option><optgroup label="Matemáticas, estadística y análisis"><option>Actuaría</option><option>Matemáticas</option><option>Matemáticas Aplicadas</option><option>Estadística</option><option>Ciencia de Datos</option><option>Economía</option><option>Finanzas</option></optgroup><optgroup label="Computación y desarrollo"><option>Ciencias de la Computación</option><option>Informática</option><option>Ingeniería de Software</option><option>Sistemas Computacionales</option><option>Inteligencia Artificial</option><option>Ciberseguridad</option><option>Tecnologías de la Información</option></optgroup><optgroup label="Ingeniería y tecnología"><option>Ingeniería en Computación</option><option>Ingeniería Electrónica</option><option>Ingeniería Eléctrica</option><option>Ingeniería Mecatrónica</option><option>Robótica</option><option>Telecomunicaciones</option></optgroup><option>Otra carrera</option></select></label><label>Semestre<input id="new-profile-semester" type="number" min="1" max="20" value="1"></label><button class="primary">Crear y abrir perfil</button><button type="button" id="cancel-profile">Cancelar</button></form></dialog>
-<script src="unam-plans.js?v=20261125-10"></script>
-<script src="app.js?v=20261125-10"></script>
+<script src="unam-plans.js?v=20261125-11"></script>
+<script src="app.js?v=20261125-11"></script>
 </body>
 </html>
