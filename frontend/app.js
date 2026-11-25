@@ -7,30 +7,26 @@ const iso = (d) => {
 };
 
 const careerCatalog = [
-  {
-    name: "Actuaría",
-    short: "Matemáticas, estadística y decisiones bajo incertidumbre.",
-    areas: ["Probabilidad y estadística", "Matemáticas financieras", "Riesgo y seguros", "Econometría y análisis de datos"],
-    subjects: ["Cálculo", "Álgebra lineal", "Probabilidad", "Estadística", "Matemáticas financieras", "Procesos estocásticos"],
-    skills: ["Modelar fenómenos aleatorios", "Analizar datos y riesgo", "Construir modelos financieros", "Comunicar resultados cuantitativos"],
-    tools: ["Python o R", "Excel", "SQL", "Herramientas de visualización"]
-  },
-  {
-    name: "Ciencias de la Computación",
-    short: "Fundamentos teóricos y prácticos para diseñar software y algoritmos.",
-    areas: ["Algoritmos y estructuras de datos", "Inteligencia artificial", "Bases de datos", "Teoría de la computación"],
-    subjects: ["Matemáticas discretas", "Programación", "Estructuras de datos", "Algoritmos", "Sistemas operativos", "Bases de datos"],
-    skills: ["Diseñar algoritmos", "Razonar formalmente", "Desarrollar software", "Resolver problemas computacionales"],
-    tools: ["Python, C++ o Java", "Git y GitHub", "Linux", "SQL"]
-  },
-  {
-    name: "Ingeniería en Computación",
-    short: "Integración de hardware, software, redes y sistemas digitales.",
-    areas: ["Arquitectura de computadoras", "Electrónica y sistemas digitales", "Redes y sistemas", "Sistemas embebidos y control"],
-    subjects: ["Programación", "Cálculo", "Física", "Circuitos digitales", "Arquitectura de computadoras", "Redes"],
-    skills: ["Integrar hardware y software", "Diseñar sistemas digitales", "Configurar redes", "Desarrollar soluciones técnicas"],
-    tools: ["C y C++", "Linux", "Microcontroladores", " simuladores de circuitos y redes"]
-  }
+  { group: "Matemáticas, estadística y análisis", name: "Actuaría", short: "Matemáticas, estadística y decisiones bajo incertidumbre.", areas: ["Probabilidad y estadística", "Matemáticas financieras", "Riesgo y seguros", "Econometría y análisis de datos"], subjects: ["Cálculo", "Álgebra lineal", "Probabilidad", "Estadística", "Matemáticas financieras", "Procesos estocásticos"], skills: ["Modelar fenómenos aleatorios", "Analizar datos y riesgo", "Construir modelos financieros"], tools: ["Python o R", "Excel", "SQL", "Visualización"] },
+  { group: "Matemáticas, estadística y análisis", name: "Matemáticas", short: "Estructuras, razonamiento y modelos matemáticos.", areas: ["Álgebra y análisis", "Geometría", "Matemática aplicada", "Modelación"], subjects: ["Cálculo", "Álgebra", "Análisis matemático", "Geometría", "Ecuaciones diferenciales"], skills: ["Demostración", "Abstracción", "Modelación"], tools: ["Python", "MATLAB", "LaTeX"] },
+  { group: "Matemáticas, estadística y análisis", name: "Matemáticas Aplicadas", short: "Métodos matemáticos para resolver problemas científicos e industriales.", areas: ["Optimización", "Modelación", "Métodos numéricos", "Sistemas dinámicos"], subjects: ["Cálculo", "Álgebra lineal", "Optimización", "Métodos numéricos"], skills: ["Modelar sistemas", "Resolver problemas cuantitativos"], tools: ["Python", "MATLAB", "R"] },
+  { group: "Matemáticas, estadística y análisis", name: "Estadística", short: "Diseño de estudios, inferencia y análisis de información.", areas: ["Inferencia", "Diseño experimental", "Series de tiempo", "Estadística computacional"], subjects: ["Probabilidad", "Inferencia", "Regresión", "Muestreo"], skills: ["Analizar incertidumbre", "Diseñar estudios", "Interpretar datos"], tools: ["R", "Python", "SQL"] },
+  { group: "Matemáticas, estadística y análisis", name: "Ciencia de Datos", short: "Estadística, programación y conocimiento extraído de datos.", areas: ["Aprendizaje automático", "Ingeniería de datos", "Visualización", "Analítica"], subjects: ["Programación", "Estadística", "Bases de datos", "Aprendizaje automático"], skills: ["Limpiar datos", "Construir modelos", "Comunicar hallazgos"], tools: ["Python", "SQL", "R", "Jupyter"] },
+  { group: "Matemáticas, estadística y análisis", name: "Economía", short: "Modelos cuantitativos para estudiar decisiones y sistemas económicos.", areas: ["Microeconomía", "Macroeconomía", "Econometría", "Economía financiera"], subjects: ["Cálculo", "Estadística", "Microeconomía", "Macroeconomía", "Econometría"], skills: ["Analizar mercados", "Interpretar indicadores", "Modelar escenarios"], tools: ["R", "Python", "Stata", "Excel"] },
+  { group: "Matemáticas, estadística y análisis", name: "Finanzas", short: "Análisis de inversiones, mercados y decisiones financieras.", areas: ["Mercados", "Riesgo", "Valuación", "Finanzas corporativas"], subjects: ["Matemáticas financieras", "Estadística", "Contabilidad", "Economía"], skills: ["Evaluar inversiones", "Medir riesgo", "Analizar estados financieros"], tools: ["Excel", "Python", "SQL"] },
+  { group: "Computación y desarrollo", name: "Ciencias de la Computación", short: "Fundamentos teóricos y prácticos para diseñar software y algoritmos.", areas: ["Algoritmos", "Inteligencia artificial", "Bases de datos", "Teoría de la computación"], subjects: ["Matemáticas discretas", "Programación", "Estructuras de datos", "Algoritmos", "Sistemas operativos"], skills: ["Diseñar algoritmos", "Razonar formalmente", "Desarrollar software"], tools: ["Python", "C++", "Git", "Linux"] },
+  { group: "Computación y desarrollo", name: "Informática", short: "Aplicación de sistemas computacionales para gestionar información.", areas: ["Sistemas de información", "Bases de datos", "Desarrollo", "Infraestructura"], subjects: ["Programación", "Bases de datos", "Redes", "Ingeniería de software"], skills: ["Integrar sistemas", "Gestionar información"], tools: ["SQL", "Python", "Linux"] },
+  { group: "Computación y desarrollo", name: "Ingeniería de Software", short: "Diseño, construcción, pruebas y mantenimiento de software.", areas: ["Arquitectura de software", "Calidad", "Desarrollo web", "DevOps"], subjects: ["Programación", "Algoritmos", "Bases de datos", "Pruebas de software"], skills: ["Diseñar aplicaciones", "Probar sistemas", "Trabajar en equipo"], tools: ["Git", "Java", "JavaScript", "Docker"] },
+  { group: "Computación y desarrollo", name: "Sistemas Computacionales", short: "Desarrollo e integración de sistemas, aplicaciones e infraestructura.", areas: ["Software", "Redes", "Bases de datos", "Sistemas operativos"], subjects: ["Programación", "Arquitectura", "Redes", "Bases de datos"], skills: ["Integrar soluciones", "Administrar sistemas"], tools: ["Linux", "SQL", "Python", "Git"] },
+  { group: "Computación y desarrollo", name: "Inteligencia Artificial", short: "Métodos computacionales para sistemas que aprenden y razonan.", areas: ["Aprendizaje automático", "Procesamiento de lenguaje", "Visión", "Robótica inteligente"], subjects: ["Álgebra lineal", "Probabilidad", "Algoritmos", "Aprendizaje automático"], skills: ["Entrenar modelos", "Evaluar sistemas", "Trabajar con datos"], tools: ["Python", "PyTorch", "TensorFlow"] },
+  { group: "Computación y desarrollo", name: "Ciberseguridad", short: "Protección de sistemas, redes, aplicaciones y datos.", areas: ["Seguridad de redes", "Criptografía", "Análisis forense", "Seguridad de software"], subjects: ["Redes", "Sistemas operativos", "Programación", "Criptografía"], skills: ["Evaluar vulnerabilidades", "Proteger infraestructura"], tools: ["Linux", "Python", "Wireshark"] },
+  { group: "Computación y desarrollo", name: "Tecnologías de la Información", short: "Administración y operación de servicios y plataformas tecnológicas.", areas: ["Infraestructura", "Servicios en nube", "Redes", "Gestión de TI"], subjects: ["Redes", "Bases de datos", "Sistemas operativos", "Gestión de proyectos"], skills: ["Administrar servicios", "Resolver incidencias"], tools: ["Linux", "SQL", "Cloud"] },
+  { group: "Ingeniería y tecnología", name: "Ingeniería en Computación", short: "Integración de hardware, software, redes y sistemas digitales.", areas: ["Arquitectura", "Electrónica digital", "Redes", "Sistemas embebidos"], subjects: ["Programación", "Cálculo", "Física", "Circuitos digitales", "Arquitectura"], skills: ["Integrar hardware y software", "Diseñar sistemas digitales"], tools: ["C/C++", "Linux", "Microcontroladores"] },
+  { group: "Ingeniería y tecnología", name: "Ingeniería Electrónica", short: "Diseño y análisis de circuitos y sistemas electrónicos.", areas: ["Circuitos", "Instrumentación", "Señales", "Sistemas embebidos"], subjects: ["Física", "Circuitos", "Electrónica", "Señales y sistemas"], skills: ["Diseñar circuitos", "Medir y probar sistemas"], tools: ["SPICE", "MATLAB", "C"] },
+  { group: "Ingeniería y tecnología", name: "Ingeniería Eléctrica", short: "Generación, conversión, control y distribución de energía eléctrica.", areas: ["Potencia", "Máquinas eléctricas", "Control", "Energías"], subjects: ["Física", "Circuitos", "Electromagnetismo", "Control"], skills: ["Analizar sistemas eléctricos", "Diseñar instalaciones"], tools: ["MATLAB", "Simuladores eléctricos"] },
+  { group: "Ingeniería y tecnología", name: "Ingeniería Mecatrónica", short: "Integración de mecánica, electrónica, control y programación.", areas: ["Robótica", "Automatización", "Control", "Sistemas embebidos"], subjects: ["Mecánica", "Electrónica", "Programación", "Control"], skills: ["Integrar sistemas", "Automatizar procesos"], tools: ["C/C++", "MATLAB", "CAD"] },
+  { group: "Ingeniería y tecnología", name: "Robótica", short: "Diseño, programación y control de sistemas robóticos.", areas: ["Percepción", "Control", "Mecánica", "Autonomía"], subjects: ["Álgebra", "Física", "Programación", "Control"], skills: ["Programar robots", "Integrar sensores y actuadores"], tools: ["Python", "ROS", "C++"] },
+  { group: "Ingeniería y tecnología", name: "Telecomunicaciones", short: "Transmisión de información y diseño de redes de comunicación.", areas: ["Redes", "Señales", "Comunicaciones inalámbricas", "Fibra óptica"], subjects: ["Señales", "Electromagnetismo", "Redes", "Probabilidad"], skills: ["Diseñar enlaces", "Analizar redes"], tools: ["Python", "MATLAB", "Wireshark"] }
 ];
 
 let data;
@@ -51,19 +47,24 @@ function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 }
 function renderCareers() {
-  $("#career-list").innerHTML = careerCatalog.map((career, index) => `
-    <article class="career-card">
-      <div class="career-number">0${index + 1}</div>
-      <h3>${career.name}</h3><p>${career.short}</p>
-      <h4>Áreas de estudio</h4><ul>${career.areas.map((item) => `<li>${item}</li>`).join("")}</ul>
-      <h4>Materias frecuentes</h4><div class="tag-list">${career.subjects.map((item) => `<span>${item}</span>`).join("")}</div>
-      <h4>Habilidades que puedes desarrollar</h4><ul>${career.skills.map((item) => `<li>${item}</li>`).join("")}</ul>
-      <h4>Herramientas útiles</h4><div class="tag-list">${career.tools.map((item) => `<span>${item}</span>`).join("")}</div>
-      <button class="primary choose-career" data-career="${career.name}">Elegir esta carrera</button>
-    </article>`).join("");
+  const groups = [...new Set(careerCatalog.map((career) => career.group))];
+  $("#career-list").innerHTML = groups.map((group) => `
+    <section class="career-group">
+      <div class="career-group-heading"><h3>${group}</h3><span>${careerCatalog.filter((career) => career.group === group).length} carreras</span></div>
+      <div class="career-group-grid">${careerCatalog.filter((career) => career.group === group).map((career, index) => `
+        <article class="career-card">
+          <div class="career-number">${String(index + 1).padStart(2, "0")}</div>
+          <h3>${career.name}</h3><p>${career.short}</p>
+          <h4>Áreas de estudio</h4><ul>${career.areas.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <h4>Materias frecuentes</h4><div class="tag-list">${career.subjects.map((item) => `<span>${item}</span>`).join("")}</div>
+          <h4>Habilidades</h4><ul>${career.skills.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <h4>Herramientas</h4><div class="tag-list">${career.tools.map((item) => `<span>${item}</span>`).join("")}</div>
+          <button class="primary choose-career" data-career="${career.name}">Elegir esta carrera</button>
+        </article>`).join("")}</div>
+    </section>`).join("");
   const chosen = careerCatalog.find((career) => career.name === data.profile.career);
   $("#career-home-title").textContent = chosen ? "Tu ruta: " + chosen.name : "Encuentra tu espacio académico";
-  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora Actuaría, Ciencias de la Computación e Ingeniería en Computación para conocer sus áreas y herramientas de estudio.";
+  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";
 }
 function render() {
   const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
@@ -100,7 +101,7 @@ function render() {
 }
 const labels = {
   dashboard: ["Panel general","Tu semestre, <em>bajo control.</em>","Organiza tus materias, pendientes y objetivos en un solo lugar."],
-  careers: ["Explorar carreras","Encuentra tu <em>ruta académica.</em>","Compara áreas, materias frecuentes y herramientas de tres disciplinas."],
+  careers: ["Explorar carreras","Encuentra tu <em>ruta académica.</em>","Compara carreras afines organizadas en tres grandes áreas."],
   subjects: ["Mis materias","Tus materias, <em>bien organizadas.</em>","Administra tus asignaturas."],
   tasks: ["Tareas y entregas","Que nada se <em>te pase.</em>","Consulta tus pendientes."],
   calendar: ["Calendario","Visualiza tu <em>semana.</em>","Fechas importantes."],
