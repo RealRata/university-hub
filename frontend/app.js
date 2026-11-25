@@ -56,15 +56,67 @@ function renderUnamPlan() {
   box.innerHTML = '<span class="plan-status ' + (exact ? "verified" : "related") + '">' + (exact ? "PLAN OFICIAL IDENTIFICADO" : "CARRERA AFÍN · VERIFICAR EQUIVALENCIA") + '</span><h3>' + escapeHTML(plan.official) + '</h3><p>' + escapeHTML(plan.entity) + '</p><a href="' + plan.url + '" target="_blank" rel="noopener">Abrir documento o ficha oficial ↗</a><p class="plan-note">Confirma plantel, modalidad y versión antes de registrar materias: la UNAM puede ofrecer planes distintos para una misma carrera.</p>';
 }
  
-let data;
-try { data = JSON.parse(localStorage.getItem("uh-data")); } catch (error) { data = null; }
-const demoSubjectNames = ["Cálculo", "Álgebra", "Programación", "Probabilidad"];
-const demoSubjectCount = Array.isArray(data?.subjects) ? data.subjects.filter((subject) => demoSubjectNames.includes(subject.name)).length : 0;
-const isOldDemo = Boolean(data && (data.profile?.name === "Estudiante de ejemplo" || demoSubjectCount >= 2));
-if (isOldDemo) { localStorage.removeItem("uh-data"); data = null; }
-data = data || { profile: { name: "", university: "", career: "", semester: 1, approved: 0, total: 0 }, subjects: [], tasks: [] };
-
-const save = () => localStorage.setItem("uh-data", JSON.stringify(data));
+const emptyWorkspace = (profile = {}) => ({
+  profile: { name: profile.name || "", university: "Universidad Nacional Autónoma de México (UNAM)", career: profile.career || "", semester: Number(profile.semester) || 1, approved: 0, total: 0 },
+  subjects: [], tasks: [], planProgress: {}, curriculumSemester: "all"
+});
+let profiles = [];
+let activeProfileId = localStorage.getItem("uh-active-profile") || "";
+try { profiles = JSON.parse(localStorage.getItem("uh-profiles")) || []; } catch (error) { profiles = []; }
+if (!Array.isArray(profiles) || !profiles.length) {
+  let legacy = null;
+  try { legacy = JSON.parse(localStorage.getItem("uh-data")); } catch (error) { legacy = null; }
+  const demoNames = ["Cálculo", "Álgebra", "Programación", "Probabilidad"];
+  const demoCount = Array.isArray(legacy?.subjects) ? legacy.subjects.filter((subject) => demoNames.includes(subject.name)).length : 0;
+  if (legacy && (legacy.profile?.name === "Estudiante de ejemplo" || demoCount >= 2)) legacy = null;
+  const first = legacy || emptyWorkspace();
+  const id = "profile-" + Date.now();
+  profiles = [{ id, label: first.profile?.name || first.profile?.career || "Mi perfil", career: first.profile?.career || "", workspace: first }];
+  activeProfileId = id;
+}
+let activeRecord = profiles.find((item) => item.id === activeProfileId) || profiles[0];
+activeProfileId = activeRecord.id;
+let data = activeRecord.workspace || emptyWorkspace({ name: activeRecord.label, career: activeRecord.career });
+const persistProfiles = () => {
+  activeRecord.workspace = data;
+  activeRecord.label = data.profile.name || data.profile.career || "Mi perfil";
+  activeRecord.career = data.profile.career || "";
+  localStorage.setItem("uh-profiles", JSON.stringify(profiles));
+  localStorage.setItem("uh-active-profile", activeProfileId);
+  localStorage.setItem("uh-data", JSON.stringify(data));
+};
+const save = () => persistProfiles();
+function refreshProfileSelector() {
+  const select = $("#profile-select");
+  if (!select) return;
+  select.innerHTML = profiles.map((item) => '<option value="' + escapeHTML(item.id) + '">' + escapeHTML(item.label || item.career || "Mi perfil") + (item.career ? " · " + escapeHTML(item.career) : "") + '</option>').join("");
+  select.value = activeProfileId;
+  $("#active-profile-name").textContent = data.profile.name || data.profile.career || "Perfil";
+}
+function switchProfile(id) {
+  const record = profiles.find((item) => item.id === id);
+  if (!record) return;
+  persistProfiles();
+  activeRecord = record;
+  activeProfileId = record.id;
+  data = record.workspace || emptyWorkspace({ name: record.label, career: record.career });
+  persistProfiles();
+  render();
+  go("dashboard");
+}
+function createProfile(name, career, semester) {
+  persistProfiles();
+  const id = "profile-" + Date.now() + "-" + Math.random().toString(36).slice(2,7);
+  const workspace = emptyWorkspace({ name, career, semester });
+  const record = { id, label: name || career || "Mi perfil", career, workspace };
+  profiles.push(record);
+  activeRecord = record;
+  activeProfileId = id;
+  data = workspace;
+  persistProfiles();
+  render();
+  go("dashboard");
+}
 const currentUnamPlan = () => Object.values(window.UNAM_STUDY_PLANS || {}).find((plan) => plan.career === data.profile.career);
 const getPlanStats = () => {
   const plan = currentUnamPlan();
@@ -156,6 +208,22 @@ function renderCurriculum() {
   root.innerHTML = markup;
 }
 
+function renderCareerContext() {
+  const career = careerCatalog.find((item) => item.name === data.profile.career);
+  $("#career-home-title").textContent = career ? "Tu ruta en " + career.name : "Encuentra tu espacio académico";
+  $("#career-home-description").textContent = career
+    ? career.short + " Áreas clave: " + career.areas.slice(0,3).join(" · ") + "."
+    : "Selecciona una carrera en tu perfil para adaptar el panel, las materias sugeridas y tu trayectoria.";
+  const subjectPanel = $("#career-focus");
+  if (subjectPanel) subjectPanel.innerHTML = career
+    ? '<h3>Enfoque de ' + escapeHTML(career.name) + '</h3><p>' + escapeHTML(career.short) + '</p><div class="tag-list">' + career.subjects.slice(0,6).map((x) => '<span>' + escapeHTML(x) + '</span>').join("") + '</div><p><b>Herramientas:</b> ' + career.tools.map(escapeHTML).join(" · ") + '</p>'
+    : '<p>Completa tu carrera en Perfil académico para ver materias, habilidades y herramientas relevantes.</p>';
+}
+function renderProfileList() {
+  const root = $("#profile-list");
+  if (!root) return;
+  root.innerHTML = profiles.map((item) => '<article class="profile-choice ' + (item.id === activeProfileId ? "selected" : "") + '"><div><strong>' + escapeHTML(item.label || "Mi perfil") + '</strong><small>' + escapeHTML(item.career || "Carrera sin seleccionar") + '</small></div><button type="button" data-switch-profile="' + escapeHTML(item.id) + '">' + (item.id === activeProfileId ? "Perfil activo" : "Abrir perfil") + '</button></article>').join("");
+}
 function render() {
   const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
   $("#name").value = data.profile.name || "";
@@ -195,6 +263,9 @@ function render() {
   $("#approved").value = data.profile.approved;
   $("#total").value = data.profile.total;
   renderCareers();
+  renderCareerContext();
+  renderProfileList();
+  refreshProfileSelector();
 }
 const labels = {
   dashboard: ["Panel general","Tu semestre, <em>bajo control.</em>","Organiza tus materias, pendientes y objetivos en un solo lugar."],
@@ -263,7 +334,19 @@ $("#tasks-list").addEventListener("change", (event) => {
 $("#profile-form").addEventListener("submit", (event) => {
   event.preventDefault();
   data.profile = {name:$("#name").value,university:"Universidad Nacional Autónoma de México (UNAM)",career:$("#career").value,semester:Number($("#semester").value),approved:Math.max(0,Number($("#approved").value)||0),total:Math.max(0,Number($("#total").value)||0)};
-  save(); render(); alert("Perfil guardado en este navegador");
+  save(); render(); alert("Cambios guardados en este perfil");
+});
+$("#profile-select").addEventListener("change", (event) => switchProfile(event.target.value));
+$("#create-profile").addEventListener("click", () => $("#profile-dialog").showModal());
+$("#cancel-profile").addEventListener("click", () => $("#profile-dialog").close());
+$("#profile-create-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  createProfile($("#new-profile-name").value.trim(), $("#new-profile-career").value, Number($("#new-profile-semester").value) || 1);
+  $("#profile-dialog").close(); event.target.reset();
+});
+$("#profile-list").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-switch-profile]");
+  if (button) switchProfile(button.dataset.switchProfile);
 });
 $("#theme").addEventListener("click", () => {
   document.body.classList.toggle("dark");
