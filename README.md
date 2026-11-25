@@ -37,7 +37,15 @@ Abre `frontend/index.html` en un navegador moderno. No requiere instalación ni 
 - [Modelo de datos](docs/data-model.md)
 - [Roadmap](docs/roadmap.md)
 
-## Planes de estudio UNAM\n\nEl perfil académico queda orientado a la UNAM. El explorador distingue las carreras con documento oficial identificado de las carreras afines cuya equivalencia todavía debe verificarse. Se incluyen enlaces institucionales a planes de Actuaría, Matemáticas, Matemáticas Aplicadas, Ciencia de Datos, Ciencias de la Computación e Ingeniería en Computación. Los enlaces de carreras afines llevan al catálogo oficial para evitar presentar una equivalencia como si fuera un plan idéntico. La UNAM puede tener planes diferentes por facultad, plantel, modalidad y versión; confirma esos datos antes de capturar materias.\n\nFuente institucional: [Oferta Académica UNAM](https://oferta.unam.mx/carreras.php).\n\n## Estado y límites
+## Planes de estudio UNAM
+
+El módulo **Plan de estudios UNAM** incorpora mapas curriculares por semestre para Actuaría (Facultad de Ciencias), Matemáticas (Facultad de Ciencias), Matemáticas Aplicadas (Facultad de Ciencias), Ciencias de la Computación (Facultad de Ciencias), Ingeniería en Computación (Facultad de Ingeniería) y una ruta de Ciencia de Datos con carrera de origen Actuaría (Facultad de Ciencias). Incluye asignaturas, créditos cuando el documento los especifica, optativas, fuente y notas de seriación o ingreso indirecto. El estudiante puede marcar materias acreditadas y consultar el avance por créditos de las materias listadas.
+
+Ciencia de Datos es de ingreso indirecto: los primeros cuatro semestres corresponden a una carrera de origen y del quinto al octavo se cursa el bloque propio de Ciencia de Datos. La ruta incluida está identificada explícitamente como Actuaría de la Facultad de Ciencias; no debe confundirse con las demás rutas de ingreso.
+
+Fuentes: [Oferta Académica UNAM](https://oferta.unam.mx/carreras.php) y los documentos PDF enlazados desde cada mapa curricular.
+
+## Estado y límites
 Esta versión es un **prototipo frontend**. Los datos personales se guardan únicamente en el navegador donde se capturan. Todavía no hay cuentas, sincronización entre dispositivos, base de datos central ni conexión con sistemas escolares. El explorador de carreras contiene orientación general para las carreras afines incluidas; sus listas de materias no son planes oficiales ni sustituyen los programas de cada universidad. El catálogo podrá ampliarse según las instituciones y los planes que se incorporen. Los planes, créditos, seriaciones y requisitos deberán verificarse con fuentes institucionales antes de presentarse como oficiales.
 
 ## Principios del producto
