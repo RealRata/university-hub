@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>University Hub</title>
-<link rel="stylesheet" href="styles.css?v=20261125-5">
+<link rel="stylesheet" href="styles.css?v=20261125-6">
 </head>
 <body>
 <aside class="sidebar">
@@ -56,9 +56,9 @@
     <section class="view" id="progress-view"><div class="section-head"><div><h2>Mi trayectoria</h2><p>Tu avance universitario.</p></div></div><div class="panel"><strong class="big" id="journey">0%</strong><div class="bar"><i id="journey-bar"></i></div><p id="journey-detail"></p><p class="muted">El avance se calculará con tus datos académicos reales. Todavía no hay materias ni progreso registrados.</p></div></section>
     <section class="view" id="profile"><div class="section-head"><div><h2>Perfil académico</h2><p>Configura tu información universitaria.</p></div></div><form class="panel form" id="profile-form">
       <label>Nombre<input id="name" value="" placeholder="Tu nombre"></label>
-      <label>Universidad<input id="university" value="" placeholder="Tu universidad"></label>
+      <label>Universidad<input id="university" value="Universidad Nacional Autónoma de México (UNAM)" readonly></label>
       <label>Carrera<select id="career"><option value="">Selecciona tu carrera</option><optgroup label="Matemáticas, estadística y análisis"><option>Actuaría</option><option>Matemáticas</option><option>Matemáticas Aplicadas</option><option>Estadística</option><option>Ciencia de Datos</option><option>Economía</option><option>Finanzas</option></optgroup><optgroup label="Computación y desarrollo"><option>Ciencias de la Computación</option><option>Informática</option><option>Ingeniería de Software</option><option>Sistemas Computacionales</option><option>Inteligencia Artificial</option><option>Ciberseguridad</option><option>Tecnologías de la Información</option></optgroup><optgroup label="Ingeniería y tecnología"><option>Ingeniería en Computación</option><option>Ingeniería Electrónica</option><option>Ingeniería Eléctrica</option><option>Ingeniería Mecatrónica</option><option>Robótica</option><option>Telecomunicaciones</option></optgroup><option>Otra carrera</option></select></label>
-      <label>Semestre<input id="semester" type="number" min="1" value="1"></label>
+      <div class="unam-plan panel" id="unam-plan-info"><p>Selecciona una carrera para consultar su correspondencia con la oferta académica y los planes de estudio oficiales de la UNAM.</p></div>\n      <label>Semestre<input id="semester" type="number" min="1" value="1"></label>
       <label>Materias aprobadas<input id="approved" type="number" min="0" value="0"></label>
       <label>Total de materias<input id="total" type="number" min="0" value="0"></label>
       <button class="primary">Guardar perfil</button>
@@ -68,6 +68,6 @@
 </main>
 <dialog id="task-dialog"><form id="task-form"><h2>Nueva tarea</h2><label>Nombre<input id="task-title" required></label><label>Materia<input id="task-subject"></label><label>Fecha<input id="task-date" type="date" required></label><button class="primary">Guardar</button><button type="button" id="cancel-task">Cancelar</button></form></dialog>
 <dialog id="subject-dialog"><form id="subject-form"><h2>Nueva materia</h2><label>Nombre<input id="subject-name" required></label><label>Créditos<input id="subject-credits" type="number" min="1" value="8"></label><label>Calificación opcional<input id="subject-grade" type="number" min="0" max="10" step=".1"></label><button class="primary">Guardar</button><button type="button" id="cancel-subject">Cancelar</button></form></dialog>
-<script src="app.js?v=20261125-5"></script>
+<script src="app.js?v=20261125-6"></script>
 </body>
 </html>
