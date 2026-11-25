@@ -220,6 +220,11 @@ $("#subject-form").addEventListener("submit", (event) => {
   save(); render(); $("#subject-dialog").close(); event.target.reset();
 });
 $("#unam-curriculum").addEventListener("change", (event) => {
+  if (event.target.id === "curriculum-semester-filter") {
+    data.curriculumSemester = event.target.value;
+    save(); renderCurriculum();
+    return;
+  }
   const key = event.target.dataset.planCourse;
   if (!key) return;
   data.planProgress = data.planProgress || {};
