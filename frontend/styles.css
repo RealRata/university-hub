@@ -82,3 +82,12 @@ dialog::backdrop{background:#10152299}
 .career-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
 @media(max-width:1050px){.career-group-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.career-group-grid{grid-template-columns:1fr}}
+
+/* Fuentes y trazabilidad de planes UNAM */
+.unam-plan{margin:18px 0;padding:20px;border:1px solid var(--line,#d9dee7);border-radius:16px}
+.unam-plan h3{margin:10px 0 6px}
+.unam-plan a{display:inline-block;margin:8px 0;color:var(--accent,#5267a8);font-weight:700}
+.plan-status{display:inline-block;font-size:.68rem;letter-spacing:.08em;font-weight:800;border-radius:999px;padding:6px 9px}
+.plan-status.verified{background:#e2f3e9;color:#17633a}
+.plan-status.related{background:#fff0d9;color:#80520a}
+.plan-note{font-size:.82rem;opacity:.8;line-height:1.55}
