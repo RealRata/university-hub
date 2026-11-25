@@ -31,7 +31,7 @@ header button,.panel button{border:1px solid var(--line);background:var(--card);
 .panel h2{font-size:16px}
 .big{font-size:34px;display:block;margin:18px 0}
 .bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}
-.bar i{display:block;background:var(--accent);height:100%;width:32%}
+.bar i{display:block;background:var(--accent);height:100%;width:0%}
 .panel p{color:var(--muted);font-size:12px;line-height:1.6}
 .accent{background:var(--soft)}
 .accent h2{font-size:20px;line-height:1.4}
