@@ -1,6 +1,6 @@
 # University Hub
 
-Plataforma web de gestión académica para estudiantes universitarios. Su primera experiencia está orientada a **Actuaría, Ciencias de la Computación e Ingeniería en Computación**, con una estructura extensible para otras carreras e instituciones.
+Plataforma web de gestión académica para estudiantes universitarios. Su catálogo inicial reúne **20 carreras afines** agrupadas en matemáticas/estadística/análisis, computación/desarrollo e ingeniería/tecnología. Actuaría, Ciencias de la Computación e Ingeniería en Computación son las disciplinas de referencia del proyecto.
 
 ## Acceso público
 **https://realrata.github.io/university-hub/**
@@ -9,7 +9,7 @@ La página raíz redirige a `frontend/`, donde vive la aplicación.
 
 ## Funciones implementadas en el prototipo
 - Panel de resumen del semestre.
-- Explorador de Actuaría, Ciencias de la Computación e Ingeniería en Computación.
+- Explorador de 20 carreras afines organizadas en tres áreas académicas.
 - Fichas por carrera con áreas de estudio, materias frecuentes, habilidades y herramientas.
 - Selector de carrera en el perfil académico.
 - Registro personal de materias y créditos.
@@ -38,7 +38,7 @@ Abre `frontend/index.html` en un navegador moderno. No requiere instalación ni 
 - [Roadmap](docs/roadmap.md)
 
 ## Estado y límites
-Esta versión es un **prototipo frontend**. Los datos personales se guardan únicamente en el navegador donde se capturan. Todavía no hay cuentas, sincronización entre dispositivos, base de datos central ni conexión con sistemas escolares. El explorador de carreras contiene orientación general; sus listas de materias no son planes oficiales ni sustituyen los programas de cada universidad. Los planes, créditos, seriaciones y requisitos deberán verificarse con fuentes institucionales antes de presentarse como oficiales.
+Esta versión es un **prototipo frontend**. Los datos personales se guardan únicamente en el navegador donde se capturan. Todavía no hay cuentas, sincronización entre dispositivos, base de datos central ni conexión con sistemas escolares. El explorador de carreras contiene orientación general para las carreras afines incluidas; sus listas de materias no son planes oficiales ni sustituyen los programas de cada universidad. El catálogo podrá ampliarse según las instituciones y los planes que se incorporen. Los planes, créditos, seriaciones y requisitos deberán verificarse con fuentes institucionales antes de presentarse como oficiales.
 
 ## Principios del producto
 1. Diseñar herramientas comunes para todas las carreras y vistas especializadas por disciplina.
