@@ -1,0 +1,59 @@
+:root{--bg:#f4f5f8;--card:#fff;--text:#252938;--muted:#858b9a;--line:#e7e9ef;--accent:#6c63d9;--soft:#efeeff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px Arial,sans-serif}
+body.dark{--bg:#11151d;--card:#1b2230;--text:#edf0f7;--muted:#a0a9ba;--line:#30394a;--soft:#302e50}
+.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:var(--card);border-right:1px solid var(--line);padding:28px 18px}
+.brand{font-size:19px;font-weight:bold;margin-bottom:42px}
+.brand b{display:inline-grid;place-items:center;background:var(--accent);color:white;width:32px;height:32px;border-radius:9px;margin-right:8px}
+.brand span{color:var(--muted);font-weight:normal}
+.muted,.sidebar p,small{color:var(--muted)}
+nav{display:grid;gap:6px;margin-top:15px}
+nav button,button{cursor:pointer}
+nav button{border:0;background:none;color:var(--muted);text-align:left;padding:12px;border-radius:8px}
+nav button.active,nav button:hover{background:var(--soft);color:var(--accent)}
+.side-bottom{position:absolute;bottom:28px;line-height:1.5}
+.side-bottom p{font-weight:bold;color:var(--text);margin-bottom:0}
+main{margin-left:235px}
+header{height:65px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4%}
+header span{color:var(--muted);font-size:12px}
+header b{color:var(--text)}
+header button,.panel button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px;border-radius:7px}
+.content{max-width:1300px;margin:auto;padding:40px 4%}
+.welcome,.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}
+.welcome h1{font-size:32px;letter-spacing:-1px;margin:9px 0}
+.welcome em{color:var(--accent);font-style:normal}
+.welcome p,.section-head p{color:var(--muted);margin:0}
+.primary{border:0!important;background:var(--accent)!important;color:white!important;border-radius:8px;padding:11px 14px;font-weight:bold}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:17px}
+.stats article,.panel{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:18px}
+.stats strong{display:block;font-size:27px;margin-top:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.panel h2{font-size:16px}
+.big{font-size:34px;display:block;margin:18px 0}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}
+.bar i{display:block;background:var(--accent);height:100%;width:32%}
+.panel p{color:var(--muted);font-size:12px;line-height:1.6}
+.accent{background:var(--soft)}
+.accent h2{font-size:20px;line-height:1.4}
+.view{display:none}
+.view.active{display:block}
+.section-head h2{margin:0 0 7px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.subject-card{background:var(--card);border:1px solid var(--line);padding:18px;border-radius:10px}
+.subject-card h3{margin:8px 0}
+.subject-card p{color:var(--muted);font-size:12px}
+.row{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+.row:last-child{border:0}
+.row small{display:block;margin-top:5px}
+.row button{padding:5px 9px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:20px}
+.day{padding:16px 8px;border:1px solid var(--line);border-radius:7px;min-height:52px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:700px}
+.form label,dialog label{display:grid;gap:7px;color:var(--muted);font-size:12px}
+input{padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}
+footer{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;padding:35px 0}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);padding:24px;width:min(400px,90vw)}
+dialog form{display:grid;gap:13px}
+dialog::backdrop{background:#10152299}
+@media(max-width:900px){.sidebar{width:190px}main{margin-left:190px}.stats{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.sidebar{position:relative;width:auto;height:auto;padding:15px}.side-bottom{display:none}main{margin:0}.brand{margin:0}.sidebar p,nav{display:none}.content{padding:24px 15px}.welcome h1{font-size:24px}.grid,.cards,.form{grid-template-columns:1fr}.stats{gap:8px}.stats article{padding:12px}.stats strong{font-size:22px}.welcome{gap:10px}.welcome .primary{font-size:0}.welcome .primary:after{content:'＋';font-size:15px}}
