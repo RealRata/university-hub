@@ -29,9 +29,6 @@ const careerCatalog = [
   { group: "Ingeniería y tecnología", name: "Telecomunicaciones", short: "Transmisión de información y diseño de redes de comunicación.", areas: ["Redes", "Señales", "Comunicaciones inalámbricas", "Fibra óptica"], subjects: ["Señales", "Electromagnetismo", "Redes", "Probabilidad"], skills: ["Diseñar enlaces", "Analizar redes"], tools: ["Python", "MATLAB", "Wireshark"] }
 ];
 
-
-];
-
 const unamPlans = {
   "Actuaría": {official:"Actuaría",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/actuaria-fciencias-planestudios17.pdf",status:"official"},
   "Matemáticas": {official:"Matemáticas",entity:"Facultad de Ciencias",url:"https://www.oferta.unam.mx/planestudios/matematicasplanestudiosfacciencias13.pdf",status:"official"},
@@ -94,10 +91,17 @@ function renderCareers() {
     </section>`).join("");
   const chosen = careerCatalog.find((career) => career.name === data.profile.career);
   $("#career-home-title").textContent = chosen ? "Tu ruta: " + chosen.name : "Encuentra tu espacio académico";
-  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";\n  renderUnamPlan();
+  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";
+  renderUnamPlan();
 }
 function render() {
-  const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);\n  $("#name").value = data.profile.name || "";\n  $("#university").value = "Universidad Nacional Autónoma de México (UNAM)";\n  $("#career").value = data.profile.career || "";\n  $("#semester").value = data.profile.semester || 1;\n  $("#approved").value = data.profile.approved || 0;\n  $("#total").value = data.profile.total || 0;
+  const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
+  $("#name").value = data.profile.name || "";
+  $("#university").value = "Universidad Nacional Autónoma de México (UNAM)";
+  $("#career").value = data.profile.career || "";
+  $("#semester").value = data.profile.semester || 1;
+  $("#approved").value = data.profile.approved || 0;
+  $("#total").value = data.profile.total || 0;
   $("#s-subjects").textContent = data.subjects.length;
   $("#s-tasks").textContent = pending.length;
   $("#s-average").textContent = average;
