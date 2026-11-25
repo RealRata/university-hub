@@ -364,9 +364,15 @@ $("#profile-list").addEventListener("click", (event) => {
   const button = event.target.closest("[data-switch-profile]");
   if (button) switchProfile(button.dataset.switchProfile);
 });
+const applyTheme = (theme) => {
+  const dark = theme !== "light";
+  document.body.classList.toggle("dark", dark);
+  localStorage.setItem("uh-theme", dark ? "dark" : "light");
+  $("#theme").textContent = dark ? "☀ Tema claro" : "☾ Tema oscuro";
+  $("#theme").setAttribute("aria-label", dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+};
+applyTheme(localStorage.getItem("uh-theme") || "dark");
 $("#theme").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("uh-theme",document.body.classList.contains("dark") ? "dark" : "light");
+  applyTheme(document.body.classList.contains("dark") ? "light" : "dark");
 });
-if (localStorage.getItem("uh-theme") === "dark") document.body.classList.add("dark");
 render();
