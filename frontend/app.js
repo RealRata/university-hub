@@ -65,7 +65,21 @@ if (isOldDemo) { localStorage.removeItem("uh-data"); data = null; }
 data = data || { profile: { name: "", university: "", career: "", semester: 1, approved: 0, total: 0 }, subjects: [], tasks: [] };
 
 const save = () => localStorage.setItem("uh-data", JSON.stringify(data));
-const pct = () => data.profile.total > 0 && data.profile.approved > 0 ? Math.min(100, Math.round(data.profile.approved / data.profile.total * 100)) : 0;
+const currentUnamPlan = () => Object.values(window.UNAM_STUDY_PLANS || {}).find((plan) => plan.career === data.profile.career);
+const getPlanStats = () => {
+  const plan = currentUnamPlan();
+  if (!plan) return null;
+  const courses = plan.semesters.flat();
+  const passed = data.planProgress || {};
+  let credits = 0, count = 0;
+  courses.forEach((course, index) => { if (passed[plan.id + "-" + index]) { credits += Number(course[0]); count += 1; } });
+  return {plan, credits, count, total: courses.length, percent: plan.credits ? Math.min(100, Math.round(credits / plan.credits * 100)) : 0};
+};
+const pct = () => {
+  const stats = getPlanStats();
+  if (stats) return stats.percent;
+  return data.profile.total > 0 && data.profile.approved > 0 ? Math.min(100, Math.round(data.profile.approved / data.profile.total * 100)) : 0;
+};
 const avg = () => {
   const grades = data.subjects.map((subject) => subject.grade).filter((grade) => grade !== null && grade !== "" && Number.isFinite(Number(grade)));
   return grades.length ? (grades.reduce((sum, grade) => sum + Number(grade), 0) / grades.length).toFixed(1) : "—";
@@ -156,11 +170,12 @@ function render() {
   $("#s-progress").textContent = progress + "%";
   $("#progress").textContent = progress + "%";
   $("#bar").style.width = progress + "%";
-  $("#credits").textContent = data.profile.total > 0 ? "Avance según las materias que registraste en tu perfil." : "Configura tu plan de estudios para calcular tu avance. Por ahora es 0%.";
+  const planStats = getPlanStats();
+  $("#credits").textContent = planStats ? planStats.credits + " créditos acreditados de " + planStats.plan.credits + " del plan oficial UNAM." : (data.profile.total > 0 ? "Avance según las materias que registraste en tu perfil." : "Selecciona una carrera UNAM con mapa curricular para calcular tu avance.");
   $("#avg").textContent = average;
   $("#journey").textContent = progress + "%";
   $("#journey-bar").style.width = progress + "%";
-  $("#journey-detail").textContent = data.profile.total > 0 ? data.profile.approved + " materias aprobadas de " + data.profile.total + ". " + (data.profile.university || "Universidad sin configurar") + " · " + (data.profile.career || "Carrera sin configurar") : "Aún no has configurado tu plan académico. Tu progreso comenzará cuando registres tus datos reales.";
+  $("#journey-detail").textContent = planStats ? planStats.count + " materias acreditadas de " + planStats.total + " asignaturas listadas. " + planStats.credits + " créditos registrados en " + planStats.plan.name + "." : (data.profile.total > 0 ? data.profile.approved + " materias aprobadas de " + data.profile.total + ". " + (data.profile.university || "Universidad sin configurar") + " · " + (data.profile.career || "Carrera sin configurar") : "Aún no has configurado tu plan académico. Tu progreso comenzará cuando selecciones tu carrera.");
   $("#upcoming").innerHTML = pending.slice().sort((a,b) => a.date.localeCompare(b.date)).map((task) => '<div class="row"><span>' + escapeHTML(task.title) + '<small>' + escapeHTML(task.subject || "Sin materia") + " · " + escapeHTML(task.date) + '</small></span><span>◦</span></div>').join("") || "<p>Sin tareas pendientes.</p>";
   $("#subject-summary").innerHTML = data.subjects.map((subject) => '<div class="row"><b>' + escapeHTML(subject.name) + '</b><span>' + Number(subject.credits) + " créditos · " + (subject.grade ?? "—") + "</span></div>").join("") || "<p>Aún no agregas materias.</p>";
   $("#subjects-list").innerHTML = data.subjects.map((subject) => '<article class="subject-card"><small>ASIGNATURA</small><h3>' + escapeHTML(subject.name) + '</h3><p>' + Number(subject.credits) + " créditos · Calificación: " + (subject.grade ?? "Sin calificar") + "</p></article>").join("") || '<div class="empty-state">Todavía no hay materias. Añade las asignaturas de tu semestre para comenzar.</div>';
