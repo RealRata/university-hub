@@ -64,7 +64,7 @@ function renderCareers() {
     </section>`).join("");
   const chosen = careerCatalog.find((career) => career.name === data.profile.career);
   $("#career-home-title").textContent = chosen ? "Tu ruta: " + chosen.name : "Encuentra tu espacio académico";
-  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";
+  $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";\n  renderUnamPlan();
 }
 function render() {
   const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
@@ -152,7 +152,7 @@ $("#tasks-list").addEventListener("change", (event) => {
 });
 $("#profile-form").addEventListener("submit", (event) => {
   event.preventDefault();
-  data.profile = {name:$("#name").value,university:$("#university").value,career:$("#career").value,semester:Number($("#semester").value),approved:Math.max(0,Number($("#approved").value)||0),total:Math.max(0,Number($("#total").value)||0)};
+  data.profile = {name:$("#name").value,university:"Universidad Nacional Autónoma de México (UNAM)",career:$("#career").value,semester:Number($("#semester").value),approved:Math.max(0,Number($("#approved").value)||0),total:Math.max(0,Number($("#total").value)||0)};
   save(); render(); alert("Perfil guardado en este navegador");
 });
 $("#theme").addEventListener("click", () => {
