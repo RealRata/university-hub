@@ -91,3 +91,22 @@ dialog::backdrop{background:#10152299}
 .plan-status.verified{background:#e2f3e9;color:#17633a}
 .plan-status.related{background:#fff0d9;color:#80520a}
 .plan-note{font-size:.82rem;opacity:.8;line-height:1.55}
+
+/* Mapa curricular oficial UNAM */
+.curriculum-meta{margin-bottom:18px}
+.curriculum-meta h3{font-size:22px;margin:12px 0 6px}
+.curriculum-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.curriculum-stats div{display:grid;gap:4px}
+.curriculum-stats strong{font-size:23px}
+.curriculum-stats small{font-size:11px;color:var(--muted)}
+.semester-block{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+.semester-title{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:5px}
+.semester-title h3{margin:0;font-size:16px}
+.semester-title span{font-size:11px;color:var(--muted)}
+.curriculum-course{display:flex!important;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:13px!important;color:var(--text)!important}
+.curriculum-course:last-child{border:0}
+.curriculum-course input{width:17px;height:17px;accent-color:var(--accent);flex:none}
+.curriculum-course span{display:block;flex:1}
+.curriculum-course small{display:block;color:var(--muted);margin-top:4px}
+.curriculum-course b{font-size:10px;color:var(--muted)}
+@media(max-width:600px){.curriculum-stats{grid-template-columns:1fr 1fr}.semester-title{align-items:flex-start;gap:8px;flex-direction:column}}
