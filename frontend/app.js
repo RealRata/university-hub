@@ -91,7 +91,8 @@ function refreshProfileSelector() {
   if (!select) return;
   select.innerHTML = profiles.map((item) => '<option value="' + escapeHTML(item.id) + '">' + escapeHTML(item.label || item.career || "Mi perfil") + (item.career ? " · " + escapeHTML(item.career) : "") + '</option>').join("");
   select.value = activeProfileId;
-  $("#active-profile-name").textContent = data.profile.name || data.profile.career || "Perfil";
+  const activeName = $("#active-profile-name");
+  if (activeName) activeName.textContent = data.profile.name || data.profile.career || "Perfil";
 }
 function switchProfile(id) {
   const record = profiles.find((item) => item.id === id);
@@ -219,6 +220,18 @@ function renderCareerContext() {
     ? '<h3>Enfoque de ' + escapeHTML(career.name) + '</h3><p>' + escapeHTML(career.short) + '</p><div class="tag-list">' + career.subjects.slice(0,6).map((x) => '<span>' + escapeHTML(x) + '</span>').join("") + '</div><p><b>Herramientas:</b> ' + career.tools.map(escapeHTML).join(" · ") + '</p>'
     : '<p>Completa tu carrera en Perfil académico para ver materias, habilidades y herramientas relevantes.</p>';
 }
+function renderGettingStarted() {
+  const root = $("#guide-steps");
+  if (!root) return;
+  const checks = [
+    {done:Boolean(data.profile.name && data.profile.career),title:"Configura tu perfil",description:"Indica tu nombre y carrera para adaptar tu espacio.",target:"profile",action:"Configurar perfil"},
+    {done:data.subjects.length>0,title:"Añade tus materias",description:"Registra las asignaturas que cursas este semestre.",target:"subjects",action:"Añadir materias"},
+    {done:data.tasks.length>0,title:"Organiza tus tareas",description:"Anota entregas y fechas para no olvidarlas.",target:"tasks",action:"Crear una tarea"}
+  ];
+  const completed = checks.filter(item=>item.done).length;
+  $("#guide-counter").textContent = completed + " de 3";
+  root.innerHTML = checks.map((item,index)=>'<article class="guide-step '+(item.done?'is-done':'')+'"><span class="guide-number">'+(item.done?'✓':String(index+1).padStart(2,'0'))+'</span><div class="guide-copy"><strong>'+item.title+'</strong><p>'+item.description+'</p></div><button type="button" data-guide-go="'+item.target+'">'+(item.done?'Ver':item.action)+' →</button></article>').join("");
+}
 function renderProfileList() {
   const root = $("#profile-list");
   if (!root) return;
@@ -265,18 +278,19 @@ function render() {
   renderCareers();
   renderCareerContext();
   renderProfileList();
+  renderGettingStarted();
   refreshProfileSelector();
 }
 const labels = {
-  dashboard: ["Panel general","Tu semestre, <em>bajo control.</em>","Organiza tus materias, pendientes y objetivos en un solo lugar."],
+  dashboard: ["Inicio","Tu semestre, <em>bajo control.</em>","Organiza tus materias, pendientes y objetivos en un solo lugar."],
   careers: ["Explorar carreras","Encuentra tu <em>ruta académica.</em>","Compara carreras afines organizadas en tres grandes áreas."],
   subjects: ["Mis materias","Tus materias, <em>bien organizadas.</em>","Administra tus asignaturas."],
   tasks: ["Tareas y entregas","Que nada se <em>te pase.</em>","Consulta tus pendientes."],
   calendar: ["Calendario","Visualiza tu <em>semana.</em>","Fechas importantes."],
   grades: ["Calificaciones","Mide tu <em>avance.</em>","Consulta tus resultados."],
-  "unam-plan": ["Plan de estudios UNAM","Tu mapa <em>curricular.</em>","Consulta asignaturas oficiales por semestre y registra tus materias acreditadas."],
-  progress: ["Mi trayectoria","Cada semestre <em>cuenta.</em>","Visualiza tu avance."],
-  profile: ["Perfil académico","Tu espacio, <em>tus reglas.</em>","Configura tu información."]
+  "unam-plan": ["Mi plan UNAM","Tu mapa <em>curricular.</em>","Consulta asignaturas oficiales por semestre y registra tus materias acreditadas."],
+  progress: ["Mi progreso","Cada semestre <em>cuenta.</em>","Visualiza tu avance."],
+  profile: ["Mi perfil","Tu espacio, <em>tus reglas.</em>","Configura tu información."]
 };
 function go(view) {
   $$(".view").forEach((element) => element.classList.remove("active"));
@@ -287,7 +301,8 @@ function go(view) {
   $("#subtitle").textContent = labels[view][2];
 }
 $$("[data-view]").forEach((button) => button.addEventListener("click", () => go(button.dataset.view)));
-$$("[data-go]").forEach((button) => button.addEventListener("click", () => go(button.dataset.go)));
+$("[data-go]").forEach((button) => button.addEventListener("click", () => go(button.dataset.go)));
+$("#guide-steps").addEventListener("click", (event) => { const button = event.target.closest("[data-guide-go]"); if (button) go(button.dataset.guideGo); });
 $("#career-list").addEventListener("click", (event) => {
   const button = event.target.closest("[data-career]");
   if (!button) return;
