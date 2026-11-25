@@ -35,6 +35,7 @@ header button,.panel button{border:1px solid var(--line);background:var(--card);
 .panel p{color:var(--muted);font-size:12px;line-height:1.6}
 .accent{background:var(--soft)}
 .accent h2{font-size:20px;line-height:1.4}
+.career-highlight{margin-top:16px}
 .view{display:none}
 .view.active{display:block}
 .section-head h2{margin:0 0 7px}
@@ -50,10 +51,24 @@ header button,.panel button{border:1px solid var(--line);background:var(--card);
 .day{padding:16px 8px;border:1px solid var(--line);border-radius:7px;min-height:52px}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:700px}
 .form label,dialog label{display:grid;gap:7px;color:var(--muted);font-size:12px}
-input{padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}
+input,select{padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}
+.career-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:stretch}
+.career-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.career-number{font-size:12px;color:var(--accent);font-weight:bold;letter-spacing:2px}
+.career-card h3{font-size:20px;margin:12px 0 8px}
+.career-card p,.career-card li{color:var(--muted);line-height:1.55;font-size:13px}
+.career-card h4{font-size:12px;margin:18px 0 6px}
+.career-card ul{padding-left:18px;margin:6px 0}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px}
+.tag-list span{font-size:11px;padding:6px 8px;border-radius:20px;background:var(--soft);color:var(--text)}
+.career-card .primary{margin-top:auto}
+.notice{font-size:12px;color:var(--muted);line-height:1.6;margin-top:18px}
+.empty-state{padding:25px;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:10px;grid-column:1/-1}
 footer{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;padding:35px 0}
 dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);padding:24px;width:min(400px,90vw)}
 dialog form{display:grid;gap:13px}
 dialog::backdrop{background:#10152299}
+@media(max-width:1050px){.career-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.sidebar{width:190px}main{margin-left:190px}.stats{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.career-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.sidebar{position:relative;width:auto;height:auto;padding:15px}.side-bottom{display:none}main{margin:0}.brand{margin:0}.sidebar p,nav{display:none}.content{padding:24px 15px}.welcome h1{font-size:24px}.grid,.cards,.form{grid-template-columns:1fr}.stats{gap:8px}.stats article{padding:12px}.stats strong{font-size:22px}.welcome{gap:10px}.welcome .primary{font-size:0}.welcome .primary:after{content:'＋';font-size:15px}}
