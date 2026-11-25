@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>University Hub</title>
-<link rel="stylesheet" href="styles.css?v=20261125-3">
+<link rel="stylesheet" href="styles.css?v=20261125-4">
 </head>
 <body>
 <aside class="sidebar">
@@ -12,6 +12,7 @@
   <p class="muted">ESPACIO ACADÉMICO</p>
   <nav>
     <button class="active" data-view="dashboard">▦ Panel general</button>
+    <button data-view="careers">⌘ Explorar carreras</button>
     <button data-view="subjects">▤ Mis materias</button>
     <button data-view="tasks">☑ Tareas y entregas</button>
     <button data-view="calendar">▦ Calendario</button>
@@ -41,6 +42,12 @@
         <article class="panel"><small>ESTE SEMESTRE</small><h2>Mis materias</h2><div id="subject-summary"></div></article>
         <article class="panel accent"><small>UN PASO A LA VEZ</small><h2>La constancia también es progreso.</h2><p>Registra tus actividades y convierte tus objetivos en acciones pequeñas y alcanzables.</p><button data-go="tasks">Organizar mi semana →</button></article>
       </div>
+      <article class="panel career-highlight"><small>RUTA DE APRENDIZAJE</small><h2 id="career-home-title">Encuentra tu espacio académico</h2><p id="career-home-description">Explora Actuaría, Ciencias de la Computación e Ingeniería en Computación para conocer sus áreas y herramientas de estudio.</p><button data-go="careers">Explorar las tres carreras →</button></article>
+    </section>
+    <section class="view" id="careers">
+      <div class="section-head"><div><h2>Explora tu carrera</h2><p>Conoce sus áreas, habilidades y herramientas de aprendizaje.</p></div></div>
+      <div class="career-grid" id="career-list"></div>
+      <p class="notice">Las áreas y materias son una guía orientativa, no un plan oficial. Los nombres, créditos, seriaciones y requisitos cambian según la universidad y el plan de estudios.</p>
     </section>
     <section class="view" id="subjects"><div class="section-head"><div><h2>Materias del semestre</h2><p>Administra tus asignaturas y créditos.</p></div><button class="primary" id="add-subject">＋ Nueva materia</button></div><div class="cards" id="subjects-list"></div></section>
     <section class="view" id="tasks"><div class="section-head"><div><h2>Tareas y entregas</h2><p>Da seguimiento a tus próximos pendientes.</p></div><button class="primary" id="add-task-2">＋ Nueva tarea</button></div><div class="panel" id="tasks-list"></div></section>
@@ -50,17 +57,17 @@
     <section class="view" id="profile"><div class="section-head"><div><h2>Perfil académico</h2><p>Configura tu información universitaria.</p></div></div><form class="panel form" id="profile-form">
       <label>Nombre<input id="name" value="" placeholder="Tu nombre"></label>
       <label>Universidad<input id="university" value="" placeholder="Tu universidad"></label>
-      <label>Carrera<input id="career" value="" placeholder="Tu carrera"></label>
+      <label>Carrera<select id="career"><option value="">Selecciona tu carrera</option><option>Actuaría</option><option>Ciencias de la Computación</option><option>Ingeniería en Computación</option><option>Otra carrera</option></select></label>
       <label>Semestre<input id="semester" type="number" min="1" value="1"></label>
       <label>Materias aprobadas<input id="approved" type="number" min="0" value="0"></label>
       <label>Total de materias<input id="total" type="number" min="0" value="0"></label>
       <button class="primary">Guardar perfil</button>
     </form></section>
-    <footer>UNIVERSITY HUB · MVP 0.1 <span>Construido para acompañar tu trayectoria.</span></footer>
+    <footer>UNIVERSITY HUB · MVP 0.2 <span>Construido para acompañar tu trayectoria.</span></footer>
   </div>
 </main>
 <dialog id="task-dialog"><form id="task-form"><h2>Nueva tarea</h2><label>Nombre<input id="task-title" required></label><label>Materia<input id="task-subject"></label><label>Fecha<input id="task-date" type="date" required></label><button class="primary">Guardar</button><button type="button" id="cancel-task">Cancelar</button></form></dialog>
 <dialog id="subject-dialog"><form id="subject-form"><h2>Nueva materia</h2><label>Nombre<input id="subject-name" required></label><label>Créditos<input id="subject-credits" type="number" min="1" value="8"></label><label>Calificación opcional<input id="subject-grade" type="number" min="0" max="10" step=".1"></label><button class="primary">Guardar</button><button type="button" id="cancel-subject">Cancelar</button></form></dialog>
-<script src="app.js?v=20261125-3"></script>
+<script src="app.js?v=20261125-4"></script>
 </body>
 </html>
