@@ -10,8 +10,14 @@ let data;
 try { data = JSON.parse(localStorage.getItem("uh-data")); } catch (error) { data = null; }
 
 // Remove the original demonstration records so a new student never starts with invented progress.
-const isOldDemo = data && data.profile && data.profile.name === "Estudiante de ejemplo" &&
-  Array.isArray(data.subjects) && data.subjects.some((subject) => ["Cálculo", "Álgebra", "Programación", "Probabilidad"].includes(subject.name));
+const demoSubjectNames = ["Cálculo", "Álgebra", "Programación", "Probabilidad"];
+const demoSubjectCount = Array.isArray(data?.subjects)
+  ? data.subjects.filter((subject) => demoSubjectNames.includes(subject.name)).length
+  : 0;
+const isOldDemo = Boolean(data && (
+  data.profile?.name === "Estudiante de ejemplo" ||
+  demoSubjectCount >= 2
+));
 if (isOldDemo) {
   localStorage.removeItem("uh-data");
   data = null;
