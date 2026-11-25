@@ -93,7 +93,49 @@ function renderCareers() {
   $("#career-home-title").textContent = chosen ? "Tu ruta: " + chosen.name : "Encuentra tu espacio académico";
   $("#career-home-description").textContent = chosen ? chosen.short + " Explora su ruta para organizar tus materias y objetivos." : "Explora carreras relacionadas con matemáticas, estadística, datos, computación e ingeniería tecnológica.";
   renderUnamPlan();
+  renderCurriculum();
 }
+
+function renderCurriculum() {
+  const root = $("#unam-curriculum");
+  if (!root) return;
+  const allPlans = window.UNAM_STUDY_PLANS || {};
+  const plan = Object.values(allPlans).find((item) => item.career === data.profile.career);
+  if (!plan) {
+    root.innerHTML = '<div class="panel"><p>Para esta carrera todavía no hay un mapa curricular oficial incorporado. No se mostrarán materias genéricas como si fueran oficiales.</p><a href="https://oferta.unam.mx/carreras.php" target="_blank" rel="noopener">Consultar oferta académica UNAM ↗</a></div>';
+    return;
+  }
+  const passed = data.planProgress || {};
+  const courses = plan.semesters.flat();
+  const totalCredits = courses.reduce((sum, course) => sum + Number(course[0]), 0);
+  let completedCredits = 0;
+  let completedCount = 0;
+  courses.forEach((course, index) => {
+    if (passed[plan.id + "-" + index]) {
+      completedCount += 1;
+      completedCredits += Number(course[0]);
+    }
+  });
+  const percent = totalCredits ? Math.round(completedCredits / totalCredits * 100) : 0;
+  let markup = '<div class="panel curriculum-meta"><span class="plan-status verified">PLAN OFICIAL UNAM</span><h3>' + escapeHTML(plan.name) + '</h3><p>' + escapeHTML(plan.entity) + ' · ' + escapeHTML(plan.version) + '</p><div class="curriculum-stats"><div><strong>' + plan.credits + '</strong><small>créditos oficiales del plan</small></div><div><strong>' + completedCredits + '</strong><small>créditos acreditados aquí</small></div><div><strong>' + percent + '%</strong><small>avance registrado</small></div></div><div class="bar"><i style="width:' + percent + '%"></i></div><p>' + completedCount + ' de ' + courses.length + ' materias marcadas como acreditadas. El porcentaje usa los créditos de las asignaturas listadas en este mapa; las materias sin créditos no suman.</p><a href="' + plan.url + '" target="_blank" rel="noopener">Consultar documento oficial UNAM ↗</a><p class="plan-note">' + escapeHTML(plan.notes) + '</p></div>';
+  let courseIndex = 0;
+  plan.semesters.forEach((semester, semesterIndex) => {
+    const semesterCredits = semester.reduce((sum, course) => sum + Number(course[0]), 0);
+    markup += '<section class="semester-block"><div class="semester-title"><h3>Semestre ' + (semesterIndex + 1) + '</h3><span>' + semesterCredits + ' créditos listados</span></div>';
+    semester.forEach((course) => {
+      const key = plan.id + "-" + courseIndex;
+      const checked = Boolean(passed[key]);
+      markup += '<label class="curriculum-course"><input type="checkbox" data-plan-course="' + key + '"' + (checked ? ' checked' : '') + '><span>' + escapeHTML(course[1]) + '<small>' + (Number(course[0]) ? course[0] + ' créditos' : 'Sin créditos') + '</small></span><b>' + (checked ? 'Acreditada' : 'Pendiente') + '</b></label>';
+      courseIndex += 1;
+    });
+    markup += '</section>';
+  });
+  if (plan.electives && plan.electives.length) {
+    markup += '<section class="panel"><h3>Ejemplos de asignaturas optativas del plan</h3><div class="tag-list">' + plan.electives.map((item) => '<span>' + escapeHTML(item) + '</span>').join('') + '</div><p class="plan-note">La oferta de optativas y su disponibilidad puede cambiar por semestre y debe confirmarse con la coordinación.</p></section>';
+  }
+  root.innerHTML = markup;
+}
+
 function render() {
   const progress = pct(), average = avg(), pending = data.tasks.filter((task) => !task.done);
   $("#name").value = data.profile.name || "";
@@ -140,6 +182,7 @@ const labels = {
   tasks: ["Tareas y entregas","Que nada se <em>te pase.</em>","Consulta tus pendientes."],
   calendar: ["Calendario","Visualiza tu <em>semana.</em>","Fechas importantes."],
   grades: ["Calificaciones","Mide tu <em>avance.</em>","Consulta tus resultados."],
+  "unam-plan": ["Plan de estudios UNAM","Tu mapa <em>curricular.</em>","Consulta asignaturas oficiales por semestre y registra tus materias acreditadas."],
   progress: ["Mi trayectoria","Cada semestre <em>cuenta.</em>","Visualiza tu avance."],
   profile: ["Perfil académico","Tu espacio, <em>tus reglas.</em>","Configura tu información."]
 };
@@ -175,6 +218,13 @@ $("#subject-form").addEventListener("submit", (event) => {
   const grade = $("#subject-grade").value;
   data.subjects.push({name:$("#subject-name").value,credits:Number($("#subject-credits").value),grade:grade === "" ? null : Number(grade)});
   save(); render(); $("#subject-dialog").close(); event.target.reset();
+});
+$("#unam-curriculum").addEventListener("change", (event) => {
+  const key = event.target.dataset.planCourse;
+  if (!key) return;
+  data.planProgress = data.planProgress || {};
+  data.planProgress[key] = event.target.checked;
+  save(); renderCurriculum();
 });
 $("#tasks-list").addEventListener("click", (event) => {
   const index = event.target.dataset.del;
