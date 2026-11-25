@@ -188,3 +188,19 @@ button:hover{filter:brightness(.98)}
 button:active{transform:translateY(1px)}
 @media(max-width:950px){.guide-steps{grid-template-columns:1fr}.guide-step{grid-template-columns:30px 1fr auto;align-items:center}.guide-copy p{margin-bottom:0}.guide-step button{grid-column:3;grid-row:1}}
 @media(max-width:650px){.guide-heading{flex-direction:column}.guide-step{grid-template-columns:28px 1fr}.guide-step button{grid-column:2;grid-row:auto}.getting-started{padding:15px}}
+
+/* Modo oscuro predeterminado y contraste de componentes */
+:root{color-scheme:light}
+body.dark{color-scheme:dark;--bg:#0d111b;--card:#171e2b;--text:#edf1fa;--muted:#a3aec1;--line:#2b3547;--accent:#9388ff;--soft:#292743}
+body.dark .plan-status.verified{background:#173b32;color:#8ce0b5}
+body.dark .plan-status.related{background:#45351c;color:#f2cb7a}
+body.dark input,body.dark select,body.dark textarea{background:#111826;color:var(--text);border-color:var(--line)}
+body.dark input::placeholder{color:#8490a5}
+body.dark .semester-block,body.dark .career-card,body.dark .subject-card{background:var(--card)}
+body.dark .guide-step.is-done{background:#20283a;border-color:#45416e}
+body.dark .guide-step.is-done .guide-number{color:#fff}
+body.dark .profile-choice button{background:var(--soft);color:var(--text)}
+body.dark dialog{background:var(--card);color:var(--text);border-color:var(--line)}
+body.dark dialog button:not(.primary){background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:9px}
+body.dark a{color:#b4adff}
+body.dark .notice{color:var(--muted)}
