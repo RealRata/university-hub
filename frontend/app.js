@@ -107,7 +107,7 @@ function renderCurriculum() {
   }
   const passed = data.planProgress || {};
   const courses = plan.semesters.flat();
-  const totalCredits = courses.reduce((sum, course) => sum + Number(course[0]), 0);
+  const listedCredits = courses.reduce((sum, course) => sum + Number(course[0]), 0);
   let completedCredits = 0;
   let completedCount = 0;
   courses.forEach((course, index) => {
@@ -116,19 +116,25 @@ function renderCurriculum() {
       completedCredits += Number(course[0]);
     }
   });
-  const percent = totalCredits ? Math.round(completedCredits / totalCredits * 100) : 0;
-  let markup = '<div class="panel curriculum-meta"><span class="plan-status verified">PLAN OFICIAL UNAM</span><h3>' + escapeHTML(plan.name) + '</h3><p>' + escapeHTML(plan.entity) + ' · ' + escapeHTML(plan.version) + '</p><div class="curriculum-stats"><div><strong>' + plan.credits + '</strong><small>créditos oficiales del plan</small></div><div><strong>' + completedCredits + '</strong><small>créditos acreditados aquí</small></div><div><strong>' + percent + '%</strong><small>avance registrado</small></div></div><div class="bar"><i style="width:' + percent + '%"></i></div><p>' + completedCount + ' de ' + courses.length + ' materias marcadas como acreditadas. El porcentaje usa los créditos de las asignaturas listadas en este mapa; las materias sin créditos no suman.</p><a href="' + plan.url + '" target="_blank" rel="noopener">Consultar documento oficial UNAM ↗</a><p class="plan-note">' + escapeHTML(plan.notes) + '</p></div>';
+  const percent = plan.credits ? Math.min(100, Math.round(completedCredits / plan.credits * 100)) : 0;
+  const selectedSemester = data.curriculumSemester || "all";
+  let markup = '<div class="panel curriculum-meta"><span class="plan-status verified">PLAN OFICIAL UNAM</span><h3>' + escapeHTML(plan.name) + '</h3><p>' + escapeHTML(plan.entity) + ' · ' + escapeHTML(plan.version) + '</p><div class="curriculum-stats"><div><strong>' + plan.credits + '</strong><small>créditos oficiales del plan</small></div><div><strong>' + listedCredits + '</strong><small>créditos en el desglose visible</small></div><div><strong>' + completedCredits + '</strong><small>créditos marcados</small></div><div><strong>' + percent + '%</strong><small>avance sobre el total oficial</small></div></div><div class="bar"><i style="width:' + percent + '%"></i></div><p>' + completedCount + ' de ' + courses.length + ' asignaturas listadas marcadas como acreditadas. Si el desglose visible difiere del total oficial, consulta las notas y el PDF del plan.</p><label class="curriculum-filter">Mostrar <select id="curriculum-semester-filter"><option value="all"' + (selectedSemester === "all" ? " selected" : "") + '>Todos los semestres</option>' + plan.semesters.map((_,i)=>'<option value="' + (i+1) + '"' + (selectedSemester === String(i+1) ? " selected" : "") + '>Semestre ' + (i+1) + '</option>').join("") + '</select></label><a href="' + plan.url + '" target="_blank" rel="noopener">Consultar documento oficial UNAM ↗</a><p class="plan-note">' + escapeHTML(plan.notes) + '</p></div>';
   let courseIndex = 0;
   plan.semesters.forEach((semester, semesterIndex) => {
+    const visible = selectedSemester === "all" || selectedSemester === String(semesterIndex + 1);
     const semesterCredits = semester.reduce((sum, course) => sum + Number(course[0]), 0);
-    markup += '<section class="semester-block"><div class="semester-title"><h3>Semestre ' + (semesterIndex + 1) + '</h3><span>' + semesterCredits + ' créditos listados</span></div>';
-    semester.forEach((course) => {
-      const key = plan.id + "-" + courseIndex;
-      const checked = Boolean(passed[key]);
-      markup += '<label class="curriculum-course"><input type="checkbox" data-plan-course="' + key + '"' + (checked ? ' checked' : '') + '><span>' + escapeHTML(course[1]) + '<small>' + (Number(course[0]) ? course[0] + ' créditos' : 'Sin créditos') + '</small></span><b>' + (checked ? 'Acreditada' : 'Pendiente') + '</b></label>';
-      courseIndex += 1;
-    });
-    markup += '</section>';
+    if (visible) {
+      markup += '<section class="semester-block"><div class="semester-title"><h3>Semestre ' + (semesterIndex + 1) + '</h3><span>' + semesterCredits + ' créditos listados</span></div>';
+      semester.forEach((course) => {
+        const key = plan.id + "-" + courseIndex;
+        const checked = Boolean(passed[key]);
+        markup += '<label class="curriculum-course"><input type="checkbox" data-plan-course="' + key + '"' + (checked ? ' checked' : '') + '><span>' + escapeHTML(course[1]) + '<small>' + (Number(course[0]) ? course[0] + ' créditos' : 'Sin créditos') + '</small></span><b>' + (checked ? 'Acreditada' : 'Pendiente') + '</b></label>';
+        courseIndex += 1;
+      });
+      markup += '</section>';
+    } else {
+      courseIndex += semester.length;
+    }
   });
   if (plan.electives && plan.electives.length) {
     markup += '<section class="panel"><h3>Ejemplos de asignaturas optativas del plan</h3><div class="tag-list">' + plan.electives.map((item) => '<span>' + escapeHTML(item) + '</span>').join('') + '</div><p class="plan-note">La oferta de optativas y su disponibilidad puede cambiar por semestre y debe confirmarse con la coordinación.</p></section>';
