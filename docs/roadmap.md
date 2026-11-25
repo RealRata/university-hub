@@ -3,6 +3,9 @@
 ## Fase 1 — Prototipo web publicado
 - [x] Identidad visual y navegación responsive inicial.
 - [x] Panel general.
+- [x] Explorador inicial de Actuaría, Ciencias de la Computación e Ingeniería en Computación.
+- [x] Fichas con áreas, materias frecuentes, habilidades y herramientas orientativas.
+- [x] Selector de carrera en el perfil.
 - [x] Alta de materias.
 - [x] Tareas y seguimiento.
 - [x] Calendario mensual.
@@ -21,6 +24,7 @@
 - [ ] Estadísticas y gráficas accesibles.
 - [ ] Exportación CSV/Excel y respaldo/restauración de datos.
 - [ ] Búsqueda, filtros y estados vacíos en todos los módulos.
+- [ ] Herramientas especializadas: calculadora actuarial/financiera, laboratorio de algoritmos y organizador de prácticas de hardware/redes.
 
 ## Fase 3 — Backend multiusuario
 - [ ] Proyecto Django y API REST versionada.
@@ -30,9 +34,10 @@
 - [ ] Sincronización entre dispositivos.
 - [ ] Exportación y eliminación de cuenta.
 
-## Fase 4 — Catálogo académico
+## Fase 4 — Catálogo académico oficial
 - [ ] Catálogo de instituciones, campus, facultades y carreras.
 - [ ] Planes de estudio versionados con fuente y fecha de verificación.
+- [ ] Planes específicos para Actuaría, Ciencias de la Computación e Ingeniería en Computación por institución.
 - [ ] Mapa curricular y seriación.
 - [ ] Cálculo de avance por materias y créditos.
 - [ ] Historial al cambiar de carrera o plan.
